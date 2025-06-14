@@ -7,7 +7,8 @@ import { Menu, X, CodeXml } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { navItems, cvPath } from '@/data/portfolioData';
-import { usePathname } from 'next/navigation'; // Not strictly needed for # links, but good practice
+import { usePathname } from 'next/navigation';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const AppHeader = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -60,7 +61,7 @@ const AppHeader = () => {
           </NavLinkComponent>
         );
       })}
-      <Button asChild variant="outline" size={isMobile ? "lg" : "sm"} className={isMobile ? "w-full mt-4" : "ml-4"}>
+      <Button asChild variant="outline" size={isMobile ? "lg" : "sm"} className={isMobile ? "w-full mt-4" : "ml-4"} suppressHydrationWarning>
         <a href={cvPath} target="_blank" rel="noopener noreferrer" download>Download CV</a>
       </Button>
     </>
@@ -82,12 +83,16 @@ const AppHeader = () => {
 
           <nav className="hidden md:flex items-center space-x-1">
             <NavLinks />
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
           </nav>
 
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
+            <ThemeToggle />
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="ml-2" suppressHydrationWarning>
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open menu</span>
                 </Button>
