@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Menu, X, CodeXml } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { navItems, cvPath } from '@/data/portfolioData';
 import { usePathname } from 'next/navigation'; // Not strictly needed for # links, but good practice
 
@@ -93,7 +93,10 @@ const AppHeader = () => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] sm:w-[320px] p-6 bg-background">
-                <div className="flex flex-col items-start space-y-4 pt-8">
+                <SheetHeader className="mb-4">
+                  <SheetTitle className="text-left text-2xl font-headline text-primary">Menu</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col items-start space-y-4">
                   <NavLinks isMobile={true} />
                 </div>
               </SheetContent>
