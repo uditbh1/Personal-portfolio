@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Download, Eye } from 'lucide-react';
 import ResumeModal from '@/components/shared/ResumeModal';
 import { cvPath } from '@/data/portfolioData';
-import { SparklesCore } from '@/components/ui/sparkles'; // Import SparklesCore
+import { SparklesCore } from '@/components/ui/sparkles';
 
 const HeroSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,9 +19,10 @@ const HeroSection = () => {
           background="transparent"
           minSize={0.2}
           maxSize={0.8}
-          particleDensity={80} // Adjusted for a less dense, subtle effect
+          particleDensity={80}
           className="w-full h-full"
           particleColor="#FFFFFF"
+          speed={1} // Optional: Adjust speed if needed
         />
       </div>
       
@@ -44,7 +45,7 @@ const HeroSection = () => {
               Download CV <Download className="ml-2 h-5 w-5" />
             </a>
           </Button>
-          <Button variant="secondary" size="lg" onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 bg-neutral-700 hover:bg-neutral-600 text-white">
+          <Button variant="secondary" size="lg" onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 bg-neutral-700 hover:bg-neutral-600 text-white" suppressHydrationWarning>
             Preview CV <Eye className="ml-2 h-5 w-5" />
           </Button>
           <Button size="lg" variant="ghost" asChild className="w-full sm:w-auto hover:text-accent transition-colors duration-300 text-neutral-300 hover:text-primary-foreground">
@@ -80,4 +81,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

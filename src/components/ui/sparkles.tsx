@@ -1,216 +1,434 @@
-
 "use client";
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useId } from "react";
+import { useEffect, useState } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import type { Container, SingleOrMultiple } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
 import { cn } from "@/lib/utils";
+import { motion, useAnimation } from "motion/react";
 
-interface SparklesCoreProps {
+type ParticlesProps = {
   id?: string;
+  className?: string;
   background?: string;
+  particleSize?: number;
   minSize?: number;
   maxSize?: number;
-  particleDensity?: number;
-  className?: string;
+  speed?: number;
   particleColor?: string;
-}
-
-interface Sparkle {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-  opacity: number;
-  vy: number; // Vertical velocity for a slight floating effect
-  vx: number; // Horizontal velocity
-}
-
-export const SparklesCore: React.FC<SparklesCoreProps> = ({
-  id = "tsparticles",
-  background = "transparent",
-  minSize = 0.4,
-  maxSize = 1.0,
-  particleDensity = 1200,
-  className,
-  particleColor = "#FFFFFF",
-}) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
-  const [particles, setParticles] = useState<Sparkle[]>([]);
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const interactionRef = useRef({ mouseX: 0, mouseY: 0, isInteracting: false });
-
+  particleDensity?: number;
+};
+export const SparklesCore = (props: ParticlesProps) => {
+  const {
+    id,
+    className,
+    background,
+    minSize,
+    maxSize,
+    speed,
+    particleColor,
+    particleDensity,
+  } = props;
+  const [init, setInit] = useState(false);
   useEffect(() => {
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext("2d");
-      setContext(ctx);
-    }
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
   }, []);
+  const controls = useAnimation();
 
-  useEffect(() => {
-    const updateContainerSize = () => {
-      if (canvasRef.current && canvasRef.current.parentElement) {
-        const { clientWidth, clientHeight } = canvasRef.current.parentElement;
-        setContainerSize({ width: clientWidth, height: clientHeight });
-        if (canvasRef.current) {
-            canvasRef.current.width = clientWidth;
-            canvasRef.current.height = clientHeight;
-        }
-      }
-    };
-
-    updateContainerSize();
-    window.addEventListener("resize", updateContainerSize);
-    return () => window.removeEventListener("resize", updateContainerSize);
-  }, []);
-
-  useEffect(() => {
-    if (containerSize.width > 0 && containerSize.height > 0) {
-      const numParticles = Math.floor(
-        (particleDensity / 100000) * containerSize.width * containerSize.height
-      );
-      const newParticles: Sparkle[] = [];
-      for (let i = 0; i < numParticles; i++) {
-        newParticles.push({
-          id: i,
-          x: Math.random() * containerSize.width,
-          y: Math.random() * containerSize.height,
-          size: Math.random() * (maxSize - minSize) + minSize,
-          color: particleColor,
-          opacity: Math.random() * 0.5 + 0.2, // Start with some opacity
-          vy: (Math.random() - 0.5) * 0.5, // Slow random float
-          vx: (Math.random() - 0.5) * 0.3,
-        });
-      }
-      setParticles(newParticles);
-    }
-  }, [containerSize, particleDensity, minSize, maxSize, particleColor]);
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      if (canvasRef.current) {
-        const rect = canvasRef.current.getBoundingClientRect();
-        interactionRef.current.mouseX = event.clientX - rect.left;
-        interactionRef.current.mouseY = event.clientY - rect.top;
-        interactionRef.current.isInteracting = true;
-      }
-    };
-    const handleMouseLeave = () => {
-        interactionRef.current.isInteracting = false;
-    }
-
-    const parentElement = canvasRef.current?.parentElement;
-    if (parentElement) {
-        parentElement.addEventListener("mousemove", handleMouseMove);
-        parentElement.addEventListener("mouseleave", handleMouseLeave);
-    }
-    
-    return () => {
-        if (parentElement) {
-            parentElement.removeEventListener("mousemove", handleMouseMove);
-            parentElement.removeEventListener("mouseleave", handleMouseLeave);
-        }
-    };
-  }, [canvasRef]);
-
-
-  useEffect(() => {
-    if (!context || !canvasRef.current) return;
-
-    let animationFrameId: number;
-
-    const render = () => {
-      setParticles(currentParticles => {
-        const updatedParticles = currentParticles.map(p => {
-          let newPx = p.x + p.vx;
-          let newPy = p.y + p.vy;
-
-          // Boundary checks (wrap around)
-          if (newPx > containerSize.width + p.size) newPx = -p.size;
-          if (newPx < -p.size) newPx = containerSize.width + p.size;
-          if (newPy > containerSize.height + p.size) newPy = -p.size;
-          if (newPy < -p.size) newPy = containerSize.height + p.size;
-
-          let newPVx = p.vx;
-          let newPVy = p.vy;
-
-          // Interaction effect
-          if (interactionRef.current.isInteracting) {
-            const dx = newPx - interactionRef.current.mouseX;
-            const dy = newPy - interactionRef.current.mouseY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const interactionRadius = 100;
-            if (distance < interactionRadius) {
-              const forceDirectionX = dx / distance;
-              const forceDirectionY = dy / distance;
-              const force = (interactionRadius - distance) / interactionRadius;
-              const maxSpeed = 2;
-              newPVx += forceDirectionX * force * 0.5;
-              newPVy += forceDirectionY * force * 0.5;
-              newPVx = Math.max(-maxSpeed, Math.min(maxSpeed, newPVx));
-              newPVy = Math.max(-maxSpeed, Math.min(maxSpeed, newPVy));
-            }
-          }
-          
-          // Gradually return to normal speed
-          newPVx *= 0.98; 
-          newPVy *= 0.98;
-          if (Math.abs(newPVx) < 0.01) newPVx = (Math.random() - 0.5) * 0.3;
-          if (Math.abs(newPVy) < 0.01) newPVy = (Math.random() - 0.5) * 0.5;
-
-          // Twinkle effect (adjust opacity)
-          const newOpacity = p.opacity + (Math.random() - 0.5) * 0.15;
-          const finalOpacity = Math.max(0.1, Math.min(1, newOpacity));
-
-          return {
-            ...p,
-            x: newPx,
-            y: newPy,
-            vx: newPVx,
-            vy: newPVy,
-            opacity: finalOpacity,
-          };
-        });
-
-        // Draw updated particles
-        context.clearRect(0, 0, containerSize.width, containerSize.height);
-        updatedParticles.forEach(particle => {
-          context.beginPath();
-          context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2, false);
-          context.fillStyle = particle.color;
-          context.globalAlpha = particle.opacity;
-          context.fill();
-        });
-
-        return updatedParticles;
+  const particlesLoaded = async (container?: Container) => {
+    if (container) {
+      controls.start({
+        opacity: 1,
+        transition: {
+          duration: 1,
+        },
       });
+    }
+  };
 
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [context, containerSize.width, containerSize.height]); // Corrected dependencies: removed `particles`
-
+  const generatedId = useId();
   return (
-    <div className={cn("relative w-full h-full", className)}>
-      <canvas
-        id={id}
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: background,
-          pointerEvents: "none", // Canvas itself should not capture mouse events for interaction
-        }}
-      />
-    </div>
+    <motion.div animate={controls} className={cn("opacity-0", className)}>
+      {init && (
+        <Particles
+          id={id || generatedId}
+          className={cn("h-full w-full")}
+          particlesLoaded={particlesLoaded}
+          options={{
+            background: {
+              color: {
+                value: background || "#0d47a1", // Default background color if not provided
+              },
+            },
+            fullScreen: {
+              enable: false, // important to set this to false to prevent canvas from covering the whole page
+              zIndex: 1,
+            },
+
+            fpsLimit: 120,
+            interactivity: {
+              events: {
+                onClick: {
+                  enable: true,
+                  mode: "push",
+                },
+                onHover: {
+                  enable: true, // Enable hover interactivity
+                  mode: "repulse", // Make particles repulse on hover
+                },
+                resize: true as any,
+              },
+              modes: {
+                push: {
+                  quantity: 4,
+                },
+                repulse: {
+                  distance: 100, // Adjust distance for repulse effect
+                  duration: 0.4,
+                },
+              },
+            },
+            particles: {
+              bounce: {
+                horizontal: {
+                  value: 1,
+                },
+                vertical: {
+                  value: 1,
+                },
+              },
+              collisions: {
+                absorb: {
+                  speed: 2,
+                },
+                bounce: {
+                  horizontal: {
+                    value: 1,
+                  },
+                  vertical: {
+                    value: 1,
+                  },
+                },
+                enable: false,
+                maxSpeed: 50,
+                mode: "bounce",
+                overlap: {
+                  enable: true,
+                  retries: 0,
+                },
+              },
+              color: {
+                value: particleColor || "#ffffff",
+                animation: {
+                  h: {
+                    count: 0,
+                    enable: false,
+                    speed: 1,
+                    decay: 0,
+                    delay: 0,
+                    sync: true,
+                    offset: 0,
+                  },
+                  s: {
+                    count: 0,
+                    enable: false,
+                    speed: 1,
+                    decay: 0,
+                    delay: 0,
+                    sync: true,
+                    offset: 0,
+                  },
+                  l: {
+                    count: 0,
+                    enable: false,
+                    speed: 1,
+                    decay: 0,
+                    delay: 0,
+                    sync: true,
+                    offset: 0,
+                  },
+                },
+              },
+              effect: {
+                close: true,
+                fill: true,
+                options: {},
+                type: {} as SingleOrMultiple<string> | undefined,
+              },
+              groups: {},
+              move: {
+                angle: {
+                  offset: 0,
+                  value: 90,
+                },
+                attract: {
+                  distance: 200,
+                  enable: false,
+                  rotate: {
+                    x: 3000,
+                    y: 3000,
+                  },
+                },
+                center: {
+                  x: 50,
+                  y: 50,
+                  mode: "percent",
+                  radius: 0,
+                },
+                decay: 0,
+                distance: {},
+                direction: "none",
+                drift: 0,
+                enable: true,
+                gravity: {
+                  acceleration: 9.81,
+                  enable: false,
+                  inverse: false,
+                  maxSpeed: 50,
+                },
+                path: {
+                  clamp: true,
+                  delay: {
+                    value: 0,
+                  },
+                  enable: false,
+                  options: {},
+                },
+                outModes: {
+                  default: "out",
+                },
+                random: false,
+                size: false,
+                speed: { // Use the speed prop or default
+                  min: speed ? speed * 0.1 : 0.1,
+                  max: speed || 1,
+                },
+                spin: {
+                  acceleration: 0,
+                  enable: false,
+                },
+                straight: false,
+                trail: {
+                  enable: false,
+                  length: 10,
+                  fill: {},
+                },
+                vibrate: false,
+                warp: false,
+              },
+              number: {
+                density: {
+                  enable: true,
+                  width: 400, // Adjust density area
+                  height: 400, // Adjust density area
+                },
+                limit: {
+                  mode: "delete",
+                  value: 0,
+                },
+                value: particleDensity || 100, // Use particleDensity prop or default
+              },
+              opacity: {
+                value: {
+                  min: 0.1,
+                  max: 1,
+                },
+                animation: {
+                  count: 0,
+                  enable: true,
+                  speed: speed || 3, // Use speed prop or default for opacity animation
+                  decay: 0,
+                  delay: 0,
+                  sync: false,
+                  mode: "auto",
+                  startValue: "random",
+                  destroy: "none",
+                },
+              },
+              reduceDuplicates: false,
+              shadow: {
+                blur: 0,
+                color: {
+                  value: "#000",
+                },
+                enable: false,
+                offset: {
+                  x: 0,
+                  y: 0,
+                },
+              },
+              shape: {
+                close: true,
+                fill: true,
+                options: {},
+                type: "circle",
+              },
+              size: {
+                value: {
+                  min: minSize || 0.4, // Use minSize prop or default
+                  max: maxSize || 1.0, // Use maxSize prop or default
+                },
+                animation: {
+                  count: 0,
+                  enable: false, // Size animation disabled by default, can be enabled
+                  speed: 5,
+                  decay: 0,
+                  delay: 0,
+                  sync: false,
+                  mode: "auto",
+                  startValue: "random",
+                  destroy: "none",
+                },
+              },
+              stroke: {
+                width: 0,
+              },
+              zIndex: {
+                value: 0,
+                opacityRate: 1,
+                sizeRate: 1,
+                velocityRate: 1,
+              },
+              destroy: {
+                bounds: {},
+                mode: "none",
+                split: {
+                  count: 1,
+                  factor: {
+                    value: 3,
+                  },
+                  rate: {
+                    value: {
+                      min: 4,
+                      max: 9,
+                    },
+                  },
+                  sizeOffset: true,
+                },
+              },
+              roll: {
+                darken: {
+                  enable: false,
+                  value: 0,
+                },
+                enable: false,
+                enlighten: {
+                  enable: false,
+                  value: 0,
+                },
+                mode: "vertical",
+                speed: 25,
+              },
+              tilt: {
+                value: 0,
+                animation: {
+                  enable: false,
+                  speed: 0,
+                  decay: 0,
+                  sync: false,
+                },
+                direction: "clockwise",
+                enable: false,
+              },
+              twinkle: {
+                lines: {
+                  enable: false,
+                  frequency: 0.05,
+                  opacity: 1,
+                },
+                particles: {
+                  enable: false,
+                  frequency: 0.05,
+                  opacity: 1,
+                },
+              },
+              wobble: {
+                distance: 5,
+                enable: false,
+                speed: {
+                  angle: 50,
+                  move: 10,
+                },
+              },
+              life: {
+                count: 0,
+                delay: {
+                  value: 0,
+                  sync: false,
+                },
+                duration: {
+                  value: 0,
+                  sync: false,
+                },
+              },
+              rotate: {
+                value: 0,
+                animation: {
+                  enable: false,
+                  speed: 0,
+                  decay: 0,
+                  sync: false,
+                },
+                direction: "clockwise",
+                path: false,
+              },
+              orbit: {
+                animation: {
+                  count: 0,
+                  enable: false,
+                  speed: 1,
+                  decay: 0,
+                  delay: 0,
+                  sync: false,
+                },
+                enable: false,
+                opacity: 1,
+                rotation: {
+                  value: 45,
+                },
+                width: 1,
+              },
+              links: {
+                blink: false,
+                color: {
+                  value: "#fff",
+                },
+                consent: false,
+                distance: 100,
+                enable: false,
+                frequency: 1,
+                opacity: 1,
+                shadow: {
+                  blur: 5,
+                  color: {
+                    value: "#000",
+                  },
+                  enable: false,
+                },
+                triangles: {
+                  enable: false,
+                  frequency: 1,
+                },
+                width: 1,
+                warp: false,
+              },
+              repulse: {
+                value: 0,
+                enabled: false,
+                distance: 1,
+                duration: 1,
+                factor: 1,
+                speed: 1,
+              },
+            },
+            detectRetina: true,
+          }}
+        />
+      )}
+    </motion.div>
   );
 };
-
