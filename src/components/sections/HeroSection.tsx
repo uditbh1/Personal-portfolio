@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Download, Eye } from 'lucide-react';
-import ResumeModal from '@/components/shared/ResumeModal';
+import { ArrowRight, Download } from 'lucide-react'; // Removed Eye
+// Removed ResumeModal import as it's no longer used
 import { cvPath } from '@/data/portfolioData';
 import { SparklesCore } from '@/components/ui/sparkles';
 
 const HeroSection = () => {
   const { resolvedTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Removed isModalOpen state as it's no longer used
 
   useEffect(() => {
     if (resolvedTheme) {
@@ -30,13 +30,13 @@ const HeroSection = () => {
       <div className="absolute inset-0 w-full h-full z-0">
         <SparklesCore
           id="tsparticleshero"
-          background="transparent" 
-          minSize={0.4}
-          maxSize={1.0}
-          particleDensity={120}
+          background="transparent"
+          minSize={0.6} // Adjusted for better visibility
+          maxSize={1.6} // Adjusted for better visibility
+          particleDensity={150} // Adjusted for better visibility
           className="w-full h-full"
           particleColor={particleColor}
-          speed={1.5}
+          speed={2} // Adjusted for better visibility
         />
       </div>
       
@@ -73,33 +73,9 @@ const HeroSection = () => {
               Download CV <Download className="ml-2 h-5 w-5" />
             </a>
           </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={() => setIsModalOpen(true)}
-            className={`w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300
-                        ${currentTheme === 'light' ? 'bg-neutral-200 hover:bg-neutral-300 text-black'
-                                                  : 'bg-neutral-700 hover:bg-neutral-600 text-white'}`}
-            suppressHydrationWarning
-          >
-            Preview CV <Eye className="ml-2 h-5 w-5" />
-          </Button>
-          <Button
-            size="lg"
-            variant="ghost"
-            asChild
-            className={`w-full sm:w-auto transition-colors duration-300 
-                        ${currentTheme === 'light' ? 'text-primary hover:text-primary/80' 
-                                                  : 'text-neutral-300 hover:text-white'}`}
-            suppressHydrationWarning
-          >
-             <a href="#contact">
-              Contact Me
-            </a>
-          </Button>
         </div>
       </div>
-      <ResumeModal isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
+      {/* ResumeModal removed */}
       <style jsx>{`
         .animation-delay-200 { animation-delay: 0.2s; }
         .animation-delay-400 { animation-delay: 0.4s; }
