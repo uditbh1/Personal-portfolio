@@ -64,7 +64,6 @@ const AppHeader = () => {
           <a key={item.label} {...commonLinkProps}>{item.label}</a>
         );
       })}
-      {/* Download CV button removed from here */}
     </>
   );
 
