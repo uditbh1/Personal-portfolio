@@ -120,57 +120,71 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     let animationFrameId: number;
 
     const render = () => {
-      context.clearRect(0, 0, containerSize.width, containerSize.height);
+      setParticles(currentParticles => {
+        const updatedParticles = currentParticles.map(p => {
+          let newPx = p.x + p.vx;
+          let newPy = p.y + p.vy;
 
-      particles.forEach((p, index) => {
-        // Update particle position
-        p.x += p.vx;
-        p.y += p.vy;
+          // Boundary checks (wrap around)
+          if (newPx > containerSize.width + p.size) newPx = -p.size;
+          if (newPx < -p.size) newPx = containerSize.width + p.size;
+          if (newPy > containerSize.height + p.size) newPy = -p.size;
+          if (newPy < -p.size) newPy = containerSize.height + p.size;
 
-        // Boundary checks (wrap around)
-        if (p.x > containerSize.width + p.size) p.x = -p.size;
-        if (p.x < -p.size) p.x = containerSize.width + p.size;
-        if (p.y > containerSize.height + p.size) p.y = -p.size;
-        if (p.y < -p.size) p.y = containerSize.height + p.size;
+          let newPVx = p.vx;
+          let newPVy = p.vy;
 
-        // Interaction effect
-        if (interactionRef.current.isInteracting) {
-          const dx = p.x - interactionRef.current.mouseX;
-          const dy = p.y - interactionRef.current.mouseY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const interactionRadius = 100; 
-          if (distance < interactionRadius) {
-            const forceDirectionX = dx / distance;
-            const forceDirectionY = dy / distance;
-            const force = (interactionRadius - distance) / interactionRadius;
-            const maxSpeed = 2;
-            p.vx += forceDirectionX * force * 0.5;
-            p.vy += forceDirectionY * force * 0.5;
-
-            p.vx = Math.max(-maxSpeed, Math.min(maxSpeed, p.vx));
-            p.vy = Math.max(-maxSpeed, Math.min(maxSpeed, p.vy));
+          // Interaction effect
+          if (interactionRef.current.isInteracting) {
+            const dx = newPx - interactionRef.current.mouseX;
+            const dy = newPy - interactionRef.current.mouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const interactionRadius = 100;
+            if (distance < interactionRadius) {
+              const forceDirectionX = dx / distance;
+              const forceDirectionY = dy / distance;
+              const force = (interactionRadius - distance) / interactionRadius;
+              const maxSpeed = 2;
+              newPVx += forceDirectionX * force * 0.5;
+              newPVy += forceDirectionY * force * 0.5;
+              newPVx = Math.max(-maxSpeed, Math.min(maxSpeed, newPVx));
+              newPVy = Math.max(-maxSpeed, Math.min(maxSpeed, newPVy));
+            }
           }
-        }
-        
-        // Gradually return to normal speed
-        p.vx *= 0.98; 
-        p.vy *= 0.98;
-        if (Math.abs(p.vx) < 0.01) p.vx = (Math.random() - 0.5) * 0.3;
-        if (Math.abs(p.vy) < 0.01) p.vy = (Math.random() - 0.5) * 0.5;
+          
+          // Gradually return to normal speed
+          newPVx *= 0.98; 
+          newPVy *= 0.98;
+          if (Math.abs(newPVx) < 0.01) newPVx = (Math.random() - 0.5) * 0.3;
+          if (Math.abs(newPVy) < 0.01) newPVy = (Math.random() - 0.5) * 0.5;
 
+          // Twinkle effect (adjust opacity)
+          const newOpacity = p.opacity + (Math.random() - 0.5) * 0.15;
+          const finalOpacity = Math.max(0.1, Math.min(1, newOpacity));
 
-        // Twinkle effect (adjust opacity)
-        const newOpacity = p.opacity + (Math.random() - 0.5) * 0.15;
-        p.opacity = Math.max(0.1, Math.min(1, newOpacity));
+          return {
+            ...p,
+            x: newPx,
+            y: newPy,
+            vx: newPVx,
+            vy: newPVy,
+            opacity: finalOpacity,
+          };
+        });
 
-        context.beginPath();
-        context.arc(p.x, p.y, p.size, 0, Math.PI * 2, false);
-        context.fillStyle = p.color;
-        context.globalAlpha = p.opacity;
-        context.fill();
+        // Draw updated particles
+        context.clearRect(0, 0, containerSize.width, containerSize.height);
+        updatedParticles.forEach(particle => {
+          context.beginPath();
+          context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2, false);
+          context.fillStyle = particle.color;
+          context.globalAlpha = particle.opacity;
+          context.fill();
+        });
+
+        return updatedParticles;
       });
 
-      setParticles([...particles]); // Trigger re-render if needed, or manage state more directly
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -179,7 +193,7 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [context, particles, containerSize]);
+  }, [context, containerSize.width, containerSize.height]); // Corrected dependencies: removed `particles`
 
   return (
     <div className={cn("relative w-full h-full", className)}>
