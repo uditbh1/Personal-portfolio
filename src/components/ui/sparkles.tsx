@@ -62,11 +62,11 @@ export const SparklesCore = (props: ParticlesProps) => {
           options={{
             background: {
               color: {
-                value: background || "#0d47a1", // Default background color if not provided
+                value: background || "#0d47a1", 
               },
             },
             fullScreen: {
-              enable: false, // important to set this to false to prevent canvas from covering the whole page
+              enable: false, 
               zIndex: 1,
             },
 
@@ -78,8 +78,8 @@ export const SparklesCore = (props: ParticlesProps) => {
                   mode: "push",
                 },
                 onHover: {
-                  enable: true, // Enable hover interactivity
-                  mode: "repulse", // Make particles repulse on hover
+                  enable: false, 
+                  mode: "repulse", 
                 },
                 resize: true as any,
               },
@@ -88,7 +88,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   quantity: 4,
                 },
                 repulse: {
-                  distance: 100, // Adjust distance for repulse effect
+                  distance: 100, 
                   duration: 0.4,
                 },
               },
@@ -123,42 +123,13 @@ export const SparklesCore = (props: ParticlesProps) => {
                 },
               },
               color: {
-                value: particleColor || "#ffffff",
-                animation: {
-                  h: {
-                    count: 0,
-                    enable: false,
-                    speed: 1,
-                    decay: 0,
-                    delay: 0,
-                    sync: true,
-                    offset: 0,
-                  },
-                  s: {
-                    count: 0,
-                    enable: false,
-                    speed: 1,
-                    decay: 0,
-                    delay: 0,
-                    sync: true,
-                    offset: 0,
-                  },
-                  l: {
-                    count: 0,
-                    enable: false,
-                    speed: 1,
-                    decay: 0,
-                    delay: 0,
-                    sync: true,
-                    offset: 0,
-                  },
-                },
+                value: particleColor || "#FFFFFF",
               },
               effect: {
                 close: true,
                 fill: true,
                 options: {},
-                type: {} as SingleOrMultiple<string> | undefined,
+                type: undefined,
               },
               groups: {},
               move: {
@@ -204,9 +175,9 @@ export const SparklesCore = (props: ParticlesProps) => {
                 },
                 random: false,
                 size: false,
-                speed: { // Use the speed prop or default
-                  min: speed ? speed * 0.1 : 0.1,
-                  max: speed || 1,
+                speed: { 
+                  min: (props.speed || 1) * 0.1,
+                  max: props.speed || 1,
                 },
                 spin: {
                   acceleration: 0,
@@ -224,14 +195,14 @@ export const SparklesCore = (props: ParticlesProps) => {
               number: {
                 density: {
                   enable: true,
-                  width: 400, // Adjust density area
-                  height: 400, // Adjust density area
+                  width: 400, 
+                  height: 400, 
                 },
                 limit: {
                   mode: "delete",
                   value: 0,
                 },
-                value: particleDensity || 100, // Use particleDensity prop or default
+                value: particleDensity || 100, 
               },
               opacity: {
                 value: {
@@ -241,7 +212,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                 animation: {
                   count: 0,
                   enable: true,
-                  speed: speed || 3, // Use speed prop or default for opacity animation
+                  speed: props.speed || 3, 
                   decay: 0,
                   delay: 0,
                   sync: false,
@@ -270,12 +241,12 @@ export const SparklesCore = (props: ParticlesProps) => {
               },
               size: {
                 value: {
-                  min: minSize || 0.4, // Use minSize prop or default
-                  max: maxSize || 1.0, // Use maxSize prop or default
+                  min: minSize || 0.4, 
+                  max: maxSize || 1.0, 
                 },
                 animation: {
                   count: 0,
-                  enable: false, // Size animation disabled by default, can be enabled
+                  enable: false, 
                   speed: 5,
                   decay: 0,
                   delay: 0,
