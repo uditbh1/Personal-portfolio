@@ -3,15 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Download } from 'lucide-react'; // Removed Eye
-// Removed ResumeModal import as it's no longer used
+import { ArrowRight, Download } from 'lucide-react';
 import { cvPath } from '@/data/portfolioData';
 import { SparklesCore } from '@/components/ui/sparkles';
 
 const HeroSection = () => {
   const { resolvedTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
-  // Removed isModalOpen state as it's no longer used
 
   useEffect(() => {
     if (resolvedTheme) {
@@ -31,12 +29,12 @@ const HeroSection = () => {
         <SparklesCore
           id="tsparticleshero"
           background="transparent"
-          minSize={0.6} // Adjusted for better visibility
-          maxSize={1.6} // Adjusted for better visibility
-          particleDensity={150} // Adjusted for better visibility
+          minSize={0.6}
+          maxSize={1.6}
+          particleDensity={150}
           className="w-full h-full"
           particleColor={particleColor}
-          speed={2} // Adjusted for better visibility
+          speed={2}
         />
       </div>
       
@@ -65,7 +63,7 @@ const HeroSection = () => {
             size="lg"
             asChild
             className={`w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 
-                        ${currentTheme === 'light' ? 'text-black border-neutral-300 hover:bg-neutral-100' 
+                        ${currentTheme === 'light' ? 'text-black border-neutral-300 hover:bg-neutral-100 hover:text-black' 
                                                   : 'text-white border-neutral-700 hover:bg-neutral-800 hover:border-neutral-600'}`}
             suppressHydrationWarning
           >
@@ -75,7 +73,6 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
-      {/* ResumeModal removed */}
       <style jsx>{`
         .animation-delay-200 { animation-delay: 0.2s; }
         .animation-delay-400 { animation-delay: 0.4s; }
