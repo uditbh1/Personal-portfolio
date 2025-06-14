@@ -3,17 +3,16 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, CodeXml } from 'lucide-react';
+import { Menu, CodeXml } from 'lucide-react'; // Removed X
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { navItems, cvPath } from '@/data/portfolioData';
-import { usePathname } from 'next/navigation';
-import { ThemeToggle } from '@/components/ThemeToggle';
+// Removed unused usePathname
+import { ThemeToggle } from '@/components/ThemeToggle'; // Import ThemeToggle
 
 const AppHeader = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,19 +45,24 @@ const AppHeader = () => {
   const NavLinks = ({isMobile = false}: {isMobile?: boolean}) => (
     <>
       {navItems.map((item) => {
-        const NavLinkComponent = isMobile ? SheetClose : 'a';
+        const commonLinkProps = {
+          href: item.href,
+          className: `px-3 py-2 rounded-md font-medium transition-colors
+            ${activeSection === item.href.substring(1) ? 'text-accent' : 'text-foreground hover:text-primary'}
+            ${isMobile ? 'block text-lg my-2' : 'text-sm'}
+          `,
+          'aria-current': activeSection === item.href.substring(1) ? 'page' : undefined,
+        };
+
+        if (isMobile) {
+          return (
+            <SheetClose asChild key={item.label}>
+              <a {...commonLinkProps}>{item.label}</a>
+            </SheetClose>
+          );
+        }
         return (
-          <NavLinkComponent
-            key={item.label}
-            href={item.href}
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors
-              ${activeSection === item.href.substring(1) ? 'text-accent' : 'text-foreground hover:text-primary'}
-              ${isMobile ? 'block text-lg my-2' : ''}
-            `}
-            aria-current={activeSection === item.href.substring(1) ? 'page' : undefined}
-          >
-            {item.label}
-          </NavLinkComponent>
+          <a key={item.label} {...commonLinkProps}>{item.label}</a>
         );
       })}
       <Button asChild variant="outline" size={isMobile ? "lg" : "sm"} className={isMobile ? "w-full mt-4" : "ml-4"} suppressHydrationWarning>
@@ -66,7 +70,6 @@ const AppHeader = () => {
       </Button>
     </>
   );
-
 
   return (
     <header
