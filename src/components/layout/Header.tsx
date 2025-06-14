@@ -3,12 +3,11 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, CodeXml } from 'lucide-react'; // Removed X
+import { Menu, CodeXml } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { navItems, cvPath } from '@/data/portfolioData';
-// Removed unused usePathname
-import { ThemeToggle } from '@/components/ThemeToggle'; // Import ThemeToggle
+import { navItems } from '@/data/portfolioData'; // cvPath is no longer needed here
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const AppHeader = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -65,9 +64,7 @@ const AppHeader = () => {
           <a key={item.label} {...commonLinkProps}>{item.label}</a>
         );
       })}
-      <Button asChild variant="outline" size={isMobile ? "lg" : "sm"} className={isMobile ? "w-full mt-4" : "ml-4"} suppressHydrationWarning>
-        <a href={cvPath} target="_blank" rel="noopener noreferrer" download>Download CV</a>
-      </Button>
+      {/* Download CV button removed from here */}
     </>
   );
 
@@ -86,7 +83,7 @@ const AppHeader = () => {
 
           <nav className="hidden md:flex items-center space-x-1">
             <NavLinks />
-            <div className="ml-2">
+            <div className="ml-2"> {/* Adjusted margin slightly for spacing if needed */}
               <ThemeToggle />
             </div>
           </nav>
