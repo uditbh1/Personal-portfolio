@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,15 +27,15 @@ body {
     --muted: 210 10% 90%; /* Light gray */
     --muted-foreground: 210 10% 45%; /* Medium gray */
 
-    --accent: 180 100% 25.1%; /* Teal #008080 */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: var(--primary); /* In light mode, accent now uses the primary color */
+    --accent-foreground: var(--primary-foreground); /* In light mode, accent-foreground now uses the primary-foreground color */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 10% 85%;
     --input: 210 10% 90%;
-    --ring: 180 100% 35.1%; /* Teal for ring focus */
+    --ring: var(--primary); /* In light mode, ring now uses the primary color */
 
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -81,7 +82,7 @@ body {
 
     --border: 210 10% 25%;
     --input: 210 10% 20%;
-    --ring: 180 100% 45.1%;
+    --ring: 180 100% 45.1%; /* Dark mode ring remains teal-based */
 
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
