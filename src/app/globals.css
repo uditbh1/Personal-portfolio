@@ -65,8 +65,11 @@ body {
     --popover: 210 10% 10%;
     --popover-foreground: 0 0% 96.1%;
 
-    --primary: 210 13% 60%; /* Lighter Slate Blue for dark mode */
-    --primary-foreground: 0 0% 100%;
+    --accent: 180 100% 35.1%; /* Lighter Teal for dark mode */
+    --accent-foreground: 0 0% 100%;
+
+    --primary: var(--accent); /* In dark mode, primary now uses the accent color */
+    --primary-foreground: var(--accent-foreground); /* In dark mode, primary-foreground now uses the accent-foreground color */
 
     --secondary: 210 10% 25%; /* Darker Slate Blue */
     --secondary-foreground: 0 0% 96.1%;
@@ -74,15 +77,15 @@ body {
     --muted: 210 10% 20%;
     --muted-foreground: 210 10% 65%;
 
-    --accent: 180 100% 35.1%; /* Lighter Teal for dark mode */
-    --accent-foreground: 0 0% 100%;
+    /* --accent is defined above and remains teal */
+    /* --accent-foreground is defined above and remains white */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 10% 25%;
     --input: 210 10% 20%;
-    --ring: 180 100% 45.1%; /* Dark mode ring remains teal-based */
+    --ring: var(--accent); /* In dark mode, ring now uses the accent color */
 
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -92,12 +95,12 @@ body {
 
     --sidebar-background: 210 10% 12%;
     --sidebar-foreground: 0 0% 96.1%;
-    --sidebar-primary: 180 100% 35.1%;
+    --sidebar-primary: 180 100% 35.1%; /* This remains teal, as it's a distinct sidebar primary */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 10% 20%;
     --sidebar-accent-foreground: 0 0% 96.1%;
     --sidebar-border: 210 10% 25%;
-    --sidebar-ring: 180 100% 45.1%;
+    --sidebar-ring: 180 100% 45.1%; /* This remains teal-based */
   }
 }
 
