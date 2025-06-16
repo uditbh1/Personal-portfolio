@@ -13,7 +13,7 @@
   --grain: none;
   --icon: none;
   --behind-gradient: none;
-  --inner-gradient: none;
+  --inner-gradient: none; /* This will be replaced by a themed variable */
   --sunpillar-1: hsl(2, 100%, 73%);
   --sunpillar-2: hsl(53, 100%, 69%);
   --sunpillar-3: hsl(93, 100%, 69%);
@@ -27,6 +27,26 @@
   --sunpillar-clr-5: var(--sunpillar-5);
   --sunpillar-clr-6: var(--sunpillar-6);
   --card-radius: 30px;
+
+  /* ProfileCard Theme Variables (Defaults for Dark Theme) */
+  --pc-inner-bg-color: rgba(15, 18, 28, 0.95); /* Dark, slightly desaturated blue */
+  --pc-user-info-bg: rgba(255, 255, 255, 0.07);
+  --pc-user-info-border: rgba(255, 255, 255, 0.12);
+  --pc-text-primary-color: rgba(235, 235, 245, 0.9);
+  --pc-text-secondary-color: rgba(200, 200, 220, 0.7);
+  --pc-contact-btn-border-color: rgba(235, 235, 245, 0.25);
+  --pc-contact-btn-border-hover-color: rgba(235, 235, 245, 0.55);
+}
+
+.light {
+  /* ProfileCard Theme Variable Overrides for Light Theme */
+  --pc-inner-bg-color: rgba(248, 249, 253, 0.95); /* Very light, cool gray */
+  --pc-user-info-bg: rgba(0, 0, 0, 0.03);
+  --pc-user-info-border: rgba(0, 0, 0, 0.08);
+  --pc-text-primary-color: rgba(30, 35, 50, 0.9);
+  --pc-text-secondary-color: rgba(60, 65, 80, 0.7);
+  --pc-contact-btn-border-color: rgba(30, 35, 50, 0.25);
+  --pc-contact-btn-border-hover-color: rgba(30, 35, 50, 0.55);
 }
 
 .pc-card-wrapper {
@@ -35,7 +55,7 @@
   position: relative;
   touch-action: none;
   width: 100%;
-  max-width: 425px; /* Base size increased */
+  max-width: 425px;
   aspect-ratio: 1 / 1;
 }
 
@@ -50,7 +70,7 @@
   filter: contrast(2) saturate(2) blur(36px);
   transform: scale(0.8) translate3d(0, 0, 0.1px);
   background-size: 100% 100%;
-  background-image: var(--behind-gradient);
+  background-image: var(--behind-gradient); /* This prop might need theming if used, but it's often complex gradients */
 }
 
 .pc-card-wrapper:hover,
@@ -67,8 +87,8 @@
 .pc-card {
   display: grid;
   width: 100%;
-  max-width: 425px; /* Base size increased */
-  aspect-ratio: 1 / 1; /* Enforce square shape */
+  max-width: 425px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
@@ -78,7 +98,7 @@
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
   background-size: 100% 100%;
   background-position: 0 0, 0 0, 50% 50%, 0 0;
-  background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(266, 100%, 90%, var(--card-opacity)) 4%, hsla(266, 50%, 80%, calc(var(--card-opacity)*0.75)) 10%, hsla(266, 25%, 70%, calc(var(--card-opacity)*0.5)) 50%, hsla(266, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%, #c137ffff 0%, #07c6ffff 40%, #07c6ffff 60%, #c137ffff 100%);
+  background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(266, 100%, 90%, var(--card-opacity)) 4%, hsla(266, 50%, 80%, calc(var(--card-opacity)*0.75)) 10%, hsla(266, 25%, 70%, calc(var(--card-opacity)*0.5)) 50%, hsla(266, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%);
   overflow: hidden;
 }
 
@@ -99,8 +119,8 @@
 .pc-inside {
   inset: 1px;
   position: absolute;
-  background-image: var(--inner-gradient);
-  background-color: rgba(0, 0, 0, 0.9); /* Fallback background */
+  /* background-image: var(--inner-gradient); -- Replaced by themed background color */
+  background-color: var(--pc-inner-bg-color);
   transform: translate3d(0, 0, 0.01px);
 }
 
@@ -181,19 +201,19 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: screen;
+  mix-blend-mode: screen; /* Consider 'normal' or remove if screen blend causes issues with themed background */
   overflow: hidden;
-  position: relative; /* Needed for absolute positioning of avatar */
+  position: relative;
 }
 
 .pc-avatar-content .avatar {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the square area */
+  object-fit: cover;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1); /* Center the image */
+  transform: translate(-50%, -50%) scale(1);
   opacity: calc(1.75 - var(--pointer-from-center));
 }
 
@@ -202,10 +222,10 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  backdrop-filter: blur(30px);
+  /* backdrop-filter: blur(30px); -- Removed to ensure inner bg is clear */
   mask: linear-gradient(to bottom,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 60%,
+      rgba(0, 0, 0, 0) 60%, /* Adjust mask if needed for text legibility */
       rgba(0, 0, 0, 1) 90%,
       rgba(0, 0, 0, 1) 100%);
   pointer-events: none;
@@ -220,9 +240,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--pc-user-info-bg);
+  backdrop-filter: blur(20px); /* Adjusted blur */
+  border: 1px solid var(--pc-user-info-border);
   border-radius: 15px;
   padding: 12px 14px;
   pointer-events: auto;
@@ -239,7 +259,7 @@
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--pc-user-info-border); /* Use themed border */
   flex-shrink: 0;
 }
 
@@ -260,32 +280,34 @@
 .pc-handle {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--pc-text-primary-color);
   line-height: 1;
 }
 
 .pc-status {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--pc-text-secondary-color);
   line-height: 1;
 }
 
 .pc-contact-btn {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--pc-contact-btn-border-color);
   border-radius: 8px;
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--pc-text-primary-color);
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
+  background-color: transparent; /* Ensure no conflicting background */
+  backdrop-filter: blur(5px); /* Optional: slight blur on button */
 }
 
 .pc-contact-btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--pc-contact-btn-border-hover-color);
   transform: translateY(-1px);
-  transition: all 0.2s ease;
+  /* Consider a subtle background change on hover if desired */
+  /* background-color: rgba(var(--pc-text-primary-color-rgb), 0.1); */
 }
 
 .pc-content {
@@ -295,29 +317,30 @@
   position: relative;
   transform: translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px) !important;
   z-index: 5;
-  mix-blend-mode: luminosity;
+  mix-blend-mode: luminosity; /* This might be too strong with themed backgrounds, consider 'normal' or removing */
 }
 
 .pc-details {
   width: 100%;
   position: absolute;
-  top: 3em; /* This area will be empty if name/title are not rendered */
+  top: 3em;
   display: flex;
   flex-direction: column;
 }
 
-.pc-details h3 { /* Styles for name, if rendered */
+/* Name and Title are not rendered, styles kept for potential future use */
+.pc-details h3 {
   font-weight: 600;
   margin: 0;
   font-size: min(5svh, 3em);
-  background-image: linear-gradient(to bottom, #fff, #6f6fbe);
+  /* background-image: linear-gradient(to bottom, #fff, #6f6fbe); -- Themed if used */
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
 }
 
-.pc-details p { /* Styles for title, if rendered */
+.pc-details p {
   font-weight: 600;
   position: relative;
   top: -12px;
@@ -325,7 +348,7 @@
   font-size: 16px;
   margin: 0 auto;
   width: min-content;
-  background-image: linear-gradient(to bottom, #fff, #4a4ac0);
+  /* background-image: linear-gradient(to bottom, #fff, #4a4ac0); -- Themed if used */
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -354,7 +377,7 @@
 
 @media (max-width: 768px) { /* For medium screens (tablets) */
   .pc-card-wrapper, .pc-card {
-    max-width: 405px; /* Increased */
+    max-width: 405px;
   }
 
   .pc-details {
@@ -377,9 +400,10 @@
   }
 
   .pc-mini-avatar {
-    width: 28px;
-    height: 28px;
+    width: 28px; /* Should be 40px from previous request, let's use 40px */
+    height: 40px;
   }
+
 
   .pc-user-details {
     gap: 10px;
@@ -390,18 +414,18 @@
   }
 
   .pc-status {
-    font-size: 10px;
+    font-size: 10px; /* Should be 12px from previous request, let's use 12px */
   }
 
   .pc-contact-btn {
     padding: 6px 12px;
-    font-size: 11px;
+    font-size: 11px; /* Should be 12px from previous request, let's use 12px */
   }
 }
 
 @media (max-width: 480px) { /* For small screens (large mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 365px; /* Increased */
+    max-width: 365px;
   }
 
   .pc-details {
@@ -426,8 +450,8 @@
   }
 
   .pc-mini-avatar {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
   }
 
   .pc-user-details {
@@ -439,7 +463,7 @@
   }
 
   .pc-status {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .pc-contact-btn {
@@ -451,7 +475,7 @@
 
 @media (max-width: 320px) { /* For extra small screens (small mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 325px; /* Increased */
+    max-width: 325px;
   }
 
   .pc-details h3 {
@@ -468,8 +492,8 @@
   }
 
   .pc-mini-avatar {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
   }
 
   .pc-user-details {
@@ -481,7 +505,7 @@
   }
 
   .pc-status {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .pc-contact-btn {
@@ -489,4 +513,9 @@
     font-size: 9px;
     border-radius: 50px;
   }
+}
+
+/* Ensure pointer events are enabled for the contact button, overriding .pc-card * rule */
+.pc-user-info .pc-contact-btn {
+  pointer-events: auto;
 }
