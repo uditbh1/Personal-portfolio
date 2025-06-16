@@ -14,8 +14,8 @@ interface ProfileCardProps {
   className?: string;
   enableTilt?: boolean;
   miniAvatarUrl?: string;
-  name?: string; // Kept in interface for potential future use
-  title?: string; // Kept in interface for potential future use
+  name?: string; // Kept in interface
+  title?: string; // Kept in interface
   handle?: string;
   status?: string;
   contactText?: string;
@@ -55,18 +55,17 @@ const easeInOutCubic = (x: number): number =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "https://placehold.co/300x300.png", // Default square placeholder
-  iconUrl = "https://placehold.co/128x128.png",
-  grainUrl = "https://placehold.co/300x300.png",
+  avatarUrl = "https://placehold.co/300x300.png", // Default prop value
+  iconUrl = "https://placehold.co/128x128.png",   // Default prop value
+  grainUrl = "https://placehold.co/300x300.png",  // Default prop value
   behindGradient,
   innerGradient,
   showBehindGradient = true,
   className = "",
   enableTilt = true,
   miniAvatarUrl,
-  // name and title props are received but not used for rendering as per previous requests
-  name, 
-  title,
+  name, // Prop received but not rendered
+  title, // Prop received but not rendered
   handle = "username",
   status = "Online",
   contactText = "Contact",
@@ -90,8 +89,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const width = card.clientWidth;
       const height = card.clientHeight;
 
-      const percentX = clamp((100 / width) * offsetX);
-      const percentY = clamp((100 / height) * offsetY);
+      // Prevent division by zero if width/height are 0
+      const percentX = width > 0 ? clamp((100 / width) * offsetX) : 50;
+      const percentY = height > 0 ? clamp((100 / height) * offsetY) : 50;
+
 
       const centerX = percentX - 50;
       const centerY = percentY - 50;
@@ -101,11 +102,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         "--pointer-y": `${percentY}%`,
         "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
         "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+        "--pointer-from-center": `${clamp(Math.hypot(centerY, centerX) / 70.71, 0, 1)}`, // Normalize against half diagonal of a square
         "--pointer-from-top": `${percentY / 100}`,
         "--pointer-from-left": `${percentX / 100}`,
-        "--rotate-x": `${round(-(centerX / 5))}deg`,
-        "--rotate-y": `${round(centerY / 4)}deg`,
+        "--rotate-x": `${round(-(centerX / 5))}deg`, // Tilt intensity for X
+        "--rotate-y": `${round(centerY / 4)}deg`,  // Tilt intensity for Y (inverted for natural feel)
       };
 
       Object.entries(properties).forEach(([property, value]) => {
@@ -206,49 +207,57 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   useEffect(() => {
     if (!enableTilt || !animationHandlers) return;
 
-    const card = cardRef.current;
-    const wrap = wrapRef.current;
+    const currentCardRef = cardRef.current;
+    const currentWrapRef = wrapRef.current;
 
-    if (!card || !wrap) return;
+    if (!currentCardRef || !currentWrapRef) return;
     
     let initialX = 0;
     let initialY = 0;
 
     const setInitialPosition = () => {
-      if (wrapRef.current && cardRef.current) {
-        initialX = wrapRef.current.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
-        initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
+      if (currentWrapRef && currentCardRef && animationHandlers) {
+        // Ensure clientWidth/Height are not 0 before calculating
+        if (currentWrapRef.clientWidth > 0 && currentWrapRef.clientHeight > 0) {
+            initialX = currentWrapRef.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
+            initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
+        } else {
+            // Fallback if dimensions are not ready
+            initialX = 200; // Arbitrary fallback
+            initialY = 50;  // Arbitrary fallback
+        }
         
-        animationHandlers.updateCardTransform(initialX, initialY, cardRef.current, wrapRef.current);
+        animationHandlers.updateCardTransform(initialX, initialY, currentCardRef, currentWrapRef);
         animationHandlers.createSmoothAnimation(
           ANIMATION_CONFIG.INITIAL_DURATION,
           initialX,
           initialY,
-          cardRef.current,
-          wrapRef.current
+          currentCardRef,
+          currentWrapRef
         );
       }
     };
     
-    // Delay initial animation slightly to ensure layout is stable
     const timeoutId = setTimeout(setInitialPosition, 100);
-
 
     const pointerMoveHandler = handlePointerMove as EventListener;
     const pointerEnterHandler = handlePointerEnter as EventListener;
     const pointerLeaveHandler = handlePointerLeave as EventListener;
 
-    card.addEventListener("pointerenter", pointerEnterHandler);
-    card.addEventListener("pointermove", pointerMoveHandler);
-    card.addEventListener("pointerleave", pointerLeaveHandler);
-
+    currentCardRef.addEventListener("pointerenter", pointerEnterHandler);
+    currentCardRef.addEventListener("pointermove", pointerMoveHandler);
+    currentCardRef.addEventListener("pointerleave", pointerLeaveHandler);
 
     return () => {
       clearTimeout(timeoutId);
-      card.removeEventListener("pointerenter", pointerEnterHandler);
-      card.removeEventListener("pointermove", pointerMoveHandler);
-      card.removeEventListener("pointerleave", pointerLeaveHandler);
-      animationHandlers.cancelAnimation();
+      if (currentCardRef) {
+        currentCardRef.removeEventListener("pointerenter", pointerEnterHandler);
+        currentCardRef.removeEventListener("pointermove", pointerMoveHandler);
+        currentCardRef.removeEventListener("pointerleave", pointerLeaveHandler);
+      }
+      if (animationHandlers) {
+        animationHandlers.cancelAnimation();
+      }
     };
   }, [
     enableTilt,
@@ -275,6 +284,19 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     onContactClick?.();
   }, [onContactClick]);
 
+  const handleMainAvatarError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = 'https://placehold.co/300x300.png?text=Avatar+Error'; // Fallback placeholder
+    target.alt = 'Error loading avatar. Displaying placeholder.';
+  };
+
+  const handleMiniAvatarError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = 'https://placehold.co/48x48.png?text=Error'; // Fallback for mini avatar
+    target.alt = 'Error loading mini avatar. Displaying placeholder.';
+  };
+
+
   return (
     <div
       ref={wrapRef}
@@ -292,10 +314,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               alt={`${handle || "User"} avatar`}
               loading="lazy"
               data-ai-hint="profile avatar"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = "none"; 
-              }}
+              onError={handleMainAvatarError}
             />
             {showUserInfo && (
               <div className="pc-user-info">
@@ -306,11 +325,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                       alt={`${handle || "User"} mini avatar`}
                       loading="lazy"
                       data-ai-hint="profile avatar small"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.opacity = "0.5";
-                        target.src = avatarUrl; 
-                      }}
+                      onError={handleMiniAvatarError}
                     />
                   </div>
                   <div className="pc-user-text">

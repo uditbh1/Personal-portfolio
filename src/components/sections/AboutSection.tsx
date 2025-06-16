@@ -10,7 +10,6 @@ const AboutSection = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -59,12 +58,11 @@ const AboutSection = () => {
     );
   }
 
-
   return (
     <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 items-center">
-          <div className="lg:col-span-2 flex justify-center items-center">
+        <div className="grid lg:grid-cols-5 gap-12 items-start"> {/* Changed items-center to items-start */}
+          <div className="lg:col-span-2 flex justify-center items-start pt-4"> {/* Added items-start and some padding-top */}
             <ProfileCard
               handle="uditb" 
               status="Seeking new opportunities"
@@ -73,7 +71,7 @@ const AboutSection = () => {
               miniAvatarUrl="/Adobe Express - file.png" 
               iconUrl="https://placehold.co/128x128.png" 
               grainUrl="https://placehold.co/300x300.png" 
-              showUserInfo={true} // Set to true to show user info bar
+              showUserInfo={true}
               enableTilt={true}
               onContactClick={handleContactClick}
             />
