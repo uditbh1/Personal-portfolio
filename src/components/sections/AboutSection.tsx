@@ -30,7 +30,7 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-5 gap-5 items-center">
           <div className="lg:col-span-2 flex justify-center items-center">
             <motion.div
-              className="relative w-64 h-64 md:w-80 md:h-80 group"
+              className="relative w-72 h-72 md:w-96 md:h-96 group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
