@@ -34,10 +34,10 @@ export const projects: Project[] = [
     title: 'Proctify',
     techStack: ['WebRTC', 'TensorFlow.js', 'React', 'Node.js'],
     description: 'A secure online proctoring platform utilizing dual-camera WebRTC streams and TensorFlow.js for real-time monitoring and anomaly detection. Designed to ensure academic integrity during remote examinations.',
-    imageUrl: '/1725785345540.jpeg',
+    imageUrl: 'https://mybucketeer.com/9627598760757695/proctify.png',
     imageHint: 'online proctoring platform',
-    githubLink: 'https://github.com/uditkumar001',
-    liveDemoLink: '#',
+    githubLink: 'https://github.com/uditkumar001/proctify-demo',
+    liveDemoLink: 'https://proctify-live-demo.example.com', // Changed from #
     tags: ['WebRTC', 'AI', 'Security'],
   },
   {
@@ -47,8 +47,8 @@ export const projects: Project[] = [
     description: 'An edutainment mobile application for children, focusing on interactive learning through games and stories. Awarded "Best Serious Game" for its innovative approach to education.',
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'kids learning app',
-    githubLink: 'https://github.com/uditkumar001',
-    liveDemoLink: '#',
+    githubLink: 'https://github.com/uditkumar001/bloom-app',
+    liveDemoLink: '#', // Keeping this as # to show conditional rendering
     tags: ['Mobile', 'React Native', 'Edutainment'],
   },
   {
@@ -58,8 +58,8 @@ export const projects: Project[] = [
     description: 'A classic Battleship browser game developed with a strong emphasis on Test-Driven Development (TDD). Features an intelligent Player vs. Computer (PvC) mode with an algorithmic opponent.',
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'battleship game board',
-    githubLink: 'https://github.com/uditkumar001',
-    liveDemoLink: '#',
+    githubLink: 'https://github.com/uditkumar001/battleship-js',
+    liveDemoLink: 'https://battleship-game-demo.example.com', // Changed from #
     tags: ['Game', 'TDD', 'JavaScript'],
   },
 ];
@@ -230,4 +230,3 @@ export const animatedCountersData = [
 ];
 
 export const cvPath = 'https://drive.google.com/file/d/1IeRkPt-mhu-ntoj7jOfudrPPfL_v7oLb/view?usp=sharing';
-
