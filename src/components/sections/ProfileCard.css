@@ -35,7 +35,7 @@
   position: relative;
   touch-action: none;
   width: 100%;
-  max-width: 350px; /* Increased from 300px */
+  max-width: 400px; /* Base size */
   aspect-ratio: 1 / 1;
 }
 
@@ -67,7 +67,7 @@
 .pc-card {
   display: grid;
   width: 100%;
-  max-width: 350px; /* Increased from 300px */
+  max-width: 400px; /* Base size */
   aspect-ratio: 1 / 1;
   border-radius: var(--card-radius);
   position: relative;
@@ -352,9 +352,9 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* For medium screens (tablets) */
   .pc-card-wrapper, .pc-card {
-    max-width: 290px; /* Adjusted for new base size */
+    max-width: 380px; 
   }
 
   .pc-details {
@@ -399,9 +399,9 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* For small screens (large mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 255px; /* Adjusted for new base size */
+    max-width: 340px; 
   }
 
   .pc-details {
@@ -449,9 +449,9 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 320px) { /* For extra small screens (small mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 210px; /* Adjusted for new base size */
+    max-width: 300px;
   }
 
   .pc-details h3 {
