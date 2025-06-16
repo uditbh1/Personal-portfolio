@@ -27,10 +27,10 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 items-center">
+        <div className="grid lg:grid-cols-5 gap-5 items-center">
           <div className="lg:col-span-2 flex justify-center items-center">
             <motion.div
-              className="relative w-60 h-60 md:w-72 md:h-72 group"
+              className="relative w-64 h-64 md:w-80 md:h-80 group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
@@ -48,7 +48,7 @@ const AboutSection = () => {
               </div>
               <div className={`relative z-10 w-full h-full rounded-full overflow-hidden border-4 ${imageBorderColor} ${imageShadowColor} shadow-2xl transition-all duration-300 group-hover:shadow-none`}>
                 <Image
-                  src="https://mybucketeer.com/9627598760757695/profile.png"
+                  src="/Adobe Express - file.png"
                   alt="Udit Bhatnagar - Professional Portrait"
                   width={400} 
                   height={400}
