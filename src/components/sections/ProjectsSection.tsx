@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+// Removed ShadCN Card, CardHeader, CardContent, CardFooter imports as they are replaced by direct CardItems
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { projects as allProjects, projectFilters } from '@/data/portfolioData';
@@ -44,58 +44,56 @@ const ProjectsSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {filteredProjects.map((project: Project) => (
-            <CardContainer key={project.id} containerClassName="py-0" className="w-full">
-              <CardBody className="bg-card relative group/card w-full h-full rounded-xl p-0 border border-foreground/[0.1] hover:shadow-2xl hover:shadow-primary/[0.1] dark:hover:shadow-accent/[0.1]">
-                <Card className="flex flex-col overflow-hidden shadow-lg transition-shadow duration-300 rounded-lg bg-transparent w-full h-full border-0">
-                  {project.imageUrl && (
-                     <CardItem as="div" translateZ={30} className="relative h-48 w-full rounded-t-lg overflow-hidden">
-                      <Image
-                        src={project.imageUrl}
-                        alt={project.title}
-                        layout="fill"
-                        objectFit="cover"
-                        data-ai-hint={project.imageHint}
-                      />
+            <CardContainer key={project.id} containerClassName="w-full" className="w-full">
+              <CardBody className="bg-card relative group/card w-full rounded-xl p-6 border border-card-foreground/10 hover:shadow-2xl hover:shadow-primary/[0.1] dark:hover:shadow-accent/[0.1] flex flex-col min-h-[450px]">
+                {project.imageUrl && (
+                   <CardItem as="div" translateZ={40} className="relative h-48 w-full rounded-lg overflow-hidden mb-4">
+                    <Image
+                      src={project.imageUrl}
+                      alt={project.title}
+                      layout="fill"
+                      objectFit="cover"
+                      data-ai-hint={project.imageHint}
+                      className="rounded-lg"
+                    />
+                  </CardItem>
+                )}
+                <CardItem as="h3" translateZ="50" className="text-2xl font-headline text-primary mb-2">
+                  {project.title}
+                </CardItem>
+                
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {project.techStack.map((tech) => (
+                    <CardItem key={tech} as="div" translateZ={30} translateX={-2} translateY={-2} className="p-0">
+                       <Badge variant="secondary" className="text-xs">{tech}</Badge>
+                    </CardItem>
+                  ))}
+                </div>
+
+                <CardItem as="p" translateZ="20" className="text-muted-foreground text-sm mb-4 flex-grow">
+                   {project.description}
+                </CardItem>
+                
+                <div className="flex justify-end space-x-3 mt-auto pt-4">
+                  {project.githubLink && (
+                    <CardItem as="div" translateZ="30" translateX={-5} translateY={5}>
+                      <Button variant="outline" size="sm" asChild className="shadow-md">
+                        <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" /> GitHub
+                        </Link>
+                      </Button>
                     </CardItem>
                   )}
-                  <CardHeader className="pt-6 px-6 pb-2">
-                    <CardItem as="div" translateZ="50" className="w-full">
-                      <CardTitle className="text-2xl font-headline text-primary">{project.title}</CardTitle>
+                  {project.liveDemoLink && project.liveDemoLink !== "#" && (
+                     <CardItem as="div" translateZ="30" translateX={5} translateY={5}>
+                      <Button variant="default" size="sm" asChild className="shadow-md">
+                        <Link href={project.liveDemoLink} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+                        </Link>
+                      </Button>
                     </CardItem>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.techStack.map((tech) => (
-                        <CardItem key={tech} as="div" translateZ={40} translateX={-2} translateY={-2} className="p-0">
-                           <Badge variant="secondary" className="text-xs">{tech}</Badge>
-                        </CardItem>
-                      ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex-grow px-6 pb-4 pt-2">
-                     <CardItem as="div" translateZ="20" className="w-full">
-                       <CardDescription className="text-muted-foreground text-sm">{project.description}</CardDescription>
-                     </CardItem>
-                  </CardContent>
-                  <CardFooter className="flex justify-end space-x-3 px-6 pb-6 pt-2">
-                    {project.githubLink && (
-                      <CardItem as="div" translateZ="30" translateX={-5} translateY={5}>
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                            <Github className="mr-2 h-4 w-4" /> GitHub
-                          </Link>
-                        </Button>
-                      </CardItem>
-                    )}
-                    {project.liveDemoLink && project.liveDemoLink !== "#" && (
-                       <CardItem as="div" translateZ="30" translateX={5} translateY={5}>
-                        <Button variant="default" size="sm" asChild>
-                          <Link href={project.liveDemoLink} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                          </Link>
-                        </Button>
-                      </CardItem>
-                    )}
-                  </CardFooter>
-                </Card>
+                  )}
+                </div>
               </CardBody>
             </CardContainer>
           ))}
@@ -106,4 +104,3 @@ const ProjectsSection = () => {
 };
 
 export default ProjectsSection;
-
