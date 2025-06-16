@@ -35,7 +35,7 @@
   position: relative;
   touch-action: none;
   width: 100%;
-  max-width: 400px; /* Base size */
+  max-width: 425px; /* Base size increased */
   aspect-ratio: 1 / 1;
 }
 
@@ -67,8 +67,8 @@
 .pc-card {
   display: grid;
   width: 100%;
-  max-width: 400px; /* Base size */
-  aspect-ratio: 1 / 1;
+  max-width: 425px; /* Base size increased */
+  aspect-ratio: 1 / 1; /* Enforce square shape */
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
@@ -354,7 +354,7 @@
 
 @media (max-width: 768px) { /* For medium screens (tablets) */
   .pc-card-wrapper, .pc-card {
-    max-width: 380px; 
+    max-width: 405px; /* Increased */
   }
 
   .pc-details {
@@ -401,7 +401,7 @@
 
 @media (max-width: 480px) { /* For small screens (large mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 340px; 
+    max-width: 365px; /* Increased */
   }
 
   .pc-details {
@@ -451,7 +451,7 @@
 
 @media (max-width: 320px) { /* For extra small screens (small mobiles) */
    .pc-card-wrapper, .pc-card {
-    max-width: 300px;
+    max-width: 325px; /* Increased */
   }
 
   .pc-details h3 {

@@ -4,22 +4,12 @@
 import { CheckCircle } from 'lucide-react';
 import { keyValues, animatedCountersData } from '@/data/portfolioData';
 import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 import ProfileCard from './ProfileCard';
 
 const AboutSection = () => {
   const [mounted, setMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
-
   useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    if (resolvedTheme) {
-      setCurrentTheme(resolvedTheme as 'light' | 'dark');
-    }
-  }, [resolvedTheme]);
 
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
@@ -34,7 +24,8 @@ const AboutSection = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
             <div className="lg:col-span-2 flex justify-center items-start pt-4">
-              <div className="w-[400px] h-[400px] bg-muted rounded-lg animate-pulse"></div>
+              {/* Skeleton loader for ProfileCard */}
+              <div className="w-[425px] h-[425px] bg-muted rounded-lg animate-pulse"></div>
             </div>
             <div className="lg:col-span-3">
               <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
