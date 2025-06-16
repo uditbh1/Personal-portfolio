@@ -21,10 +21,10 @@ const AboutSection = () => {
     return (
       <section id="about" className="py-20 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12 items-center">
-            <div className="lg:col-span-2 flex justify-center items-center">
+          <div className="grid lg:grid-cols-5 gap-12 items-start">
+            <div className="lg:col-span-2 flex justify-center items-start pt-4">
               {/* Updated skeleton to be square and match card's approx size */}
-              <div className="w-[300px] h-[300px] bg-muted rounded-lg animate-pulse"></div>
+              <div className="w-[350px] h-[350px] bg-muted rounded-lg animate-pulse"></div>
             </div>
             <div className="lg:col-span-3">
               <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
@@ -61,8 +61,8 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 items-start"> {/* Changed items-center to items-start */}
-          <div className="lg:col-span-2 flex justify-center items-start pt-4"> {/* Added items-start and some padding-top */}
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          <div className="lg:col-span-2 flex justify-center items-start pt-4">
             <ProfileCard
               handle="uditb" 
               status="Seeking new opportunities"

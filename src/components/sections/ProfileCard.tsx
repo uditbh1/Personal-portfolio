@@ -69,7 +69,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   handle = "username",
   status = "Online",
   contactText = "Contact",
-  showUserInfo = true,
+  showUserInfo = false,
   onContactClick,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);

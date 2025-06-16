@@ -34,10 +34,9 @@
   transform: translate3d(0, 0, 0.1px);
   position: relative;
   touch-action: none;
-  /* Ensure the wrapper itself has a size if the card inside might collapse */
   width: 100%;
-  max-width: 300px; /* Consistent with .pc-card max-width */
-  aspect-ratio: 1 / 1; /* Make wrapper square too */
+  max-width: 350px; /* Increased from 300px */
+  aspect-ratio: 1 / 1;
 }
 
 .pc-card-wrapper::before {
@@ -67,9 +66,9 @@
 
 .pc-card {
   display: grid;
-  width: 100%; /* Takes width from its container, up to max-width */
-  max-width: 300px; /* Controls the maximum size of the card */
-  aspect-ratio: 1 / 1; /* Enforces a square shape */
+  width: 100%;
+  max-width: 350px; /* Increased from 300px */
+  aspect-ratio: 1 / 1;
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
@@ -355,7 +354,7 @@
 
 @media (max-width: 768px) {
   .pc-card-wrapper, .pc-card {
-    max-width: 250px; /* Adjusted for smaller screens, maintains square */
+    max-width: 290px; /* Adjusted for new base size */
   }
 
   .pc-details {
@@ -402,7 +401,7 @@
 
 @media (max-width: 480px) {
    .pc-card-wrapper, .pc-card {
-    max-width: 220px; /* Adjusted for smaller screens, maintains square */
+    max-width: 255px; /* Adjusted for new base size */
   }
 
   .pc-details {
@@ -452,7 +451,7 @@
 
 @media (max-width: 320px) {
    .pc-card-wrapper, .pc-card {
-    max-width: 180px; /* Further adjusted */
+    max-width: 210px; /* Adjusted for new base size */
   }
 
   .pc-details h3 {
