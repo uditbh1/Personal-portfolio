@@ -4,11 +4,29 @@
 import { CheckCircle, Code as CodeIcon, Zap, Award } from 'lucide-react';
 import { keyValues, animatedCountersData } from '@/data/portfolioData';
 import { useEffect, useState } from 'react';
-import ProfileCard from './ProfileCard'; 
+import { useTheme } from 'next-themes';
+import { motion } from 'framer-motion';
+import { SparklesCore } from '@/components/ui/sparkles';
+import Image from 'next/image';
+import ProfileCard from './ProfileCard';
 
 const AboutSection = () => {
   const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
+
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (resolvedTheme) {
+      setCurrentTheme(resolvedTheme as 'light' | 'dark');
+    }
+  }, [resolvedTheme]);
+
+  const particleColor = currentTheme === 'light' ? '#708090' : '#008080'; // Slate Blue for light, Teal for dark
+  const imageBorderColor = currentTheme === 'light' ? 'border-primary' : 'border-accent';
+  const imageShadowColor = currentTheme === 'light' ? 'shadow-primary/30' : 'shadow-accent/30';
+
 
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
@@ -21,7 +39,7 @@ const AboutSection = () => {
     return (
       <section id="about" className="py-20 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12 items-start">
+          <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
             <div className="lg:col-span-2 flex justify-center items-start pt-4">
               {/* Updated skeleton to be square and match card's approx size */}
               <div className="w-[350px] h-[350px] bg-muted rounded-lg animate-pulse"></div>
@@ -61,16 +79,16 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 items-start">
+        <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
           <div className="lg:col-span-2 flex justify-center items-start pt-4">
             <ProfileCard
-              handle="uditb" 
+              handle="uditb"
               status="Seeking new opportunities"
               contactText="Get in Touch"
-              avatarUrl="/Adobe Express - file.png" 
-              miniAvatarUrl="/Adobe Express - file.png" 
-              iconUrl="https://placehold.co/128x128.png" 
-              grainUrl="https://placehold.co/300x300.png" 
+              avatarUrl="/Adobe Express - file.png"
+              miniAvatarUrl="/Adobe Express - file.png"
+              iconUrl="https://placehold.co/128x128.png?text=Icon"
+              grainUrl="https://placehold.co/300x300.png?text=Grain"
               showUserInfo={true}
               enableTilt={true}
               onContactClick={handleContactClick}
@@ -95,11 +113,16 @@ const AboutSection = () => {
 
             <div className="grid sm:grid-cols-3 gap-6 text-center">
               {animatedCountersData.map(counter => (
-                <div key={counter.id} className="p-6 bg-card shadow-md rounded-lg transition-transform duration-300 hover:scale-105">
-                    {counter.icon && <counter.icon className="h-10 w-10 text-primary mx-auto mb-3" />}
-                    <p className="text-3xl font-bold text-primary">{counter.value}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{counter.label}</p>
-                </div>
+                <motion.div 
+                  key={counter.id} 
+                  className="p-6 bg-card shadow-md rounded-lg transition-shadow duration-300 hover:shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {counter.icon && <counter.icon className="h-10 w-10 text-primary mx-auto mb-3" />}
+                  <p className="text-3xl font-bold text-primary">{counter.value}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{counter.label}</p>
+                </motion.div>
               ))}
             </div>
           </div>
