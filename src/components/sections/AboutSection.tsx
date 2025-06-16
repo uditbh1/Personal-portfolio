@@ -1,63 +1,91 @@
 
 "use client";
 
-import Image from 'next/image';
-import { CheckCircle, Zap, Code as CodeIcon, Award } from 'lucide-react'; // Renamed Code to CodeIcon to avoid conflict
+import { CheckCircle } from 'lucide-react';
 import { keyValues, animatedCountersData } from '@/data/portfolioData';
-import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { SparklesCore } from '@/components/ui/sparkles';
-import { motion } from 'framer-motion';
+import ProfileCard from './ProfileCard'; // Import the new ProfileCard
 
 const AboutSection = () => {
-  const { resolvedTheme } = useTheme();
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
+  // Themed styles for ProfileCard can be passed as props if needed,
+  // or ProfileCard can use useTheme internally if it needs to adapt.
+  // For now, ProfileCard has its own theme-agnostic styling.
 
-  useEffect(() => {
-    if (resolvedTheme) {
-      setCurrentTheme(resolvedTheme as 'light' | 'dark');
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [resolvedTheme]);
+  };
 
-  const particleColor = currentTheme === 'dark' ? 'hsl(var(--accent))' : 'hsl(var(--primary))';
-  const imageBorderColor = currentTheme === 'dark' ? 'border-accent' : 'border-primary';
-  const imageShadowColor = currentTheme === 'dark' ? 'shadow-accent/30' : 'shadow-primary/30';
+  if (!mounted) {
+    // Basic skeleton or placeholder to avoid layout shift and hydration errors
+    return (
+      <section id="about" className="py-20 bg-secondary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-5 gap-12 items-center">
+            <div className="lg:col-span-2 flex justify-center items-center">
+              <div className="w-[300px] h-[420px] bg-muted rounded-lg animate-pulse"></div> {/* Placeholder for card */}
+            </div>
+            <div className="lg:col-span-3">
+              <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
+              <div className="space-y-3 mb-6">
+                <div className="h-6 bg-muted rounded w-3/4 animate-pulse"></div>
+                <div className="h-6 bg-muted rounded w-full animate-pulse"></div>
+                <div className="h-6 bg-muted rounded w-5/6 animate-pulse"></div>
+              </div>
+              <div className="h-8 bg-muted rounded w-1/3 mb-4 animate-pulse"></div>
+              <div className="space-y-3 mb-8">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className="h-5 w-5 bg-muted rounded-full mr-3 animate-pulse"></div>
+                    <div className="h-5 bg-muted rounded w-1/2 animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid sm:grid-cols-3 gap-6 text-center">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="p-6 bg-card shadow-md rounded-lg">
+                    <div className="h-10 w-10 bg-muted rounded-full mx-auto mb-3 animate-pulse"></div>
+                    <div className="h-8 bg-muted rounded w-1/2 mx-auto animate-pulse"></div>
+                    <div className="h-4 bg-muted rounded w-3/4 mx-auto mt-1 animate-pulse"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
 
   return (
     <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-5 items-center">
+        <div className="grid lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-2 flex justify-center items-center">
-            <motion.div
-              className="relative w-72 h-72 md:w-96 md:h-96 group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            >
-              <div className="absolute inset-0 z-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-                <SparklesCore
-                  id="tsparticlesabout"
-                  background="transparent"
-                  minSize={0.3}
-                  maxSize={0.8}
-                  particleDensity={40}
-                  className="w-full h-full"
-                  particleColor={particleColor}
-                  speed={0.5}
-                />
-              </div>
-              <div className={`relative z-10 w-full h-full rounded-full overflow-hidden border-4 ${imageBorderColor} ${imageShadowColor} shadow-2xl transition-all duration-300 group-hover:shadow-none`}>
-                <Image
-                  src="/Adobe Express - file.png"
-                  alt="Udit Bhatnagar - Professional Portrait"
-                  width={400} 
-                  height={400}
-                  className="object-cover w-full h-full"
-                  data-ai-hint="professional portrait"
-                  priority
-                />
-              </div>
-            </motion.div>
+            {/* Replace the old image section with ProfileCard */}
+            <ProfileCard
+              name="Udit Bhatnagar"
+              title="Full Stack Developer"
+              handle="uditb" // Example handle
+              status="Seeking new opportunities"
+              contactText="Get in Touch"
+              avatarUrl="/Adobe Express - file.png" // Your actual avatar image
+              miniAvatarUrl="/Adobe Express - file.png" // Can be same or different
+              iconUrl="https://placehold.co/128x128.png" // Placeholder for card's internal design
+              grainUrl="https://placehold.co/300x300.png" // Placeholder for card's grain texture
+              showUserInfo={true}
+              enableTilt={true}
+              onContactClick={handleContactClick}
+              // You can add more props here as defined in ProfileCardProps
+              // e.g., behindGradient, innerGradient if you want to customize them
+            />
           </div>
           <div className="lg:col-span-3">
             <h2 className="text-4xl font-bold font-headline uppercase tracking-wider text-primary mb-6">
@@ -79,9 +107,7 @@ const AboutSection = () => {
             <div className="grid sm:grid-cols-3 gap-6 text-center">
               {animatedCountersData.map(counter => (
                 <div key={counter.id} className="p-6 bg-card shadow-md rounded-lg transition-transform duration-300 hover:scale-105">
-                    {counter.id === 'exp' && <Zap className="h-10 w-10 text-primary mx-auto mb-3" />}
-                    {counter.id === 'projects' && <CodeIcon className="h-10 w-10 text-primary mx-auto mb-3" />}
-                    {counter.id === 'commits' && <Award className="h-10 w-10 text-primary mx-auto mb-3" />}
+                    {counter.icon && <counter.icon className="h-10 w-10 text-primary mx-auto mb-3" />}
                     <p className="text-3xl font-bold text-primary">{counter.value}</p>
                     <p className="text-sm text-muted-foreground mt-1">{counter.label}</p>
                 </div>
@@ -95,3 +121,6 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
+
+    
