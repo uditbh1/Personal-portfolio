@@ -11,12 +11,12 @@ const AboutSection = () => {
           <div className="lg:col-span-2">
             <Card className="overflow-hidden shadow-xl rounded-lg">
               <Image
-                src="https://placehold.co/600x700.png"
+                src="https://mybucketeer.com/5765039960757695/Udit%20profile%20picture.jpg"
                 alt="Udit Bhatnagar - Professional Portrait"
                 width={600}
                 height={700}
                 className="object-cover w-full h-full"
-                data-ai-hint="professional portrait developer"
+                data-ai-hint="professional portrait"
               />
             </Card>
           </div>

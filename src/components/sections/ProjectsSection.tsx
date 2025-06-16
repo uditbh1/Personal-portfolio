@@ -73,6 +73,8 @@ const ProjectsSection = () => {
                    <p className="text-muted-foreground text-sm">
                     {project.description}
                    </p>
+                   
+                   
                 </CardItem>
                 
                 <div className="flex justify-end space-x-3 mt-auto pt-4">
