@@ -63,9 +63,9 @@
 
 .pc-card {
   display: grid;
-  width: 100%; /* Responsive width */
-  max-width: 350px; /* Max size of the card */
-  aspect-ratio: 1 / 1; /* Square aspect ratio */
+  width: 100%; /* Takes width from its container, up to max-width */
+  max-width: 300px; /* Controls the maximum size of the card */
+  aspect-ratio: 1 / 1; /* Enforces a square shape */
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
@@ -180,15 +180,17 @@
 .pc-avatar-content {
   mix-blend-mode: screen;
   overflow: hidden;
+  position: relative; /* Needed for absolute positioning of avatar */
 }
 
 .pc-avatar-content .avatar {
   width: 100%;
-  height: 100%; /* Ensure avatar fills the square space */
-  object-fit: cover; /* Cover the area, cropping if necessary */
+  height: 100%;
+  object-fit: cover;
   position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   opacity: calc(1.75 - var(--pointer-from-center));
 }
 
@@ -296,16 +298,15 @@
 .pc-details {
   width: 100%;
   position: absolute;
-  top: 3em;
+  top: 3em; /* This area will be empty if name/title are not rendered */
   display: flex;
   flex-direction: column;
 }
 
-.pc-details h3 {
+.pc-details h3 { /* Styles for name, if rendered */
   font-weight: 600;
   margin: 0;
   font-size: min(5svh, 3em);
-  margin: 0;
   background-image: linear-gradient(to bottom, #fff, #6f6fbe);
   background-size: 1em 1.5em;
   -webkit-text-fill-color: transparent;
@@ -313,7 +314,7 @@
   -webkit-background-clip: text;
 }
 
-.pc-details p {
+.pc-details p { /* Styles for title, if rendered */
   font-weight: 600;
   position: relative;
   top: -12px;
@@ -350,7 +351,7 @@
 
 @media (max-width: 768px) {
   .pc-card {
-    max-width: 300px; /* Adjusted for smaller screens, maintains square */
+    max-width: 250px; /* Adjusted for smaller screens, maintains square */
   }
 
   .pc-details {
@@ -397,7 +398,7 @@
 
 @media (max-width: 480px) {
   .pc-card {
-    max-width: 250px; /* Adjusted for smaller screens, maintains square */
+    max-width: 220px; /* Adjusted for smaller screens, maintains square */
   }
 
   .pc-details {
@@ -445,9 +446,9 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 320px) { /* This media query might be too small for the card to be very usable with user info */
   .pc-card {
-    max-width: 200px; /* Adjusted for smaller screens, maintains square */
+    max-width: 180px; /* Further adjusted */
   }
 
   .pc-details h3 {

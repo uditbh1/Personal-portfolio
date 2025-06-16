@@ -14,8 +14,8 @@ interface ProfileCardProps {
   className?: string;
   enableTilt?: boolean;
   miniAvatarUrl?: string;
-  name?: string; // Name prop is kept for interface consistency
-  title?: string; 
+  name?: string; // Kept in interface for potential future use
+  title?: string; // Kept in interface for potential future use
   handle?: string;
   status?: string;
   contactText?: string;
@@ -55,7 +55,7 @@ const easeInOutCubic = (x: number): number =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "https://placehold.co/400x560.png", 
+  avatarUrl = "https://placehold.co/300x300.png", // Default square placeholder
   iconUrl = "https://placehold.co/128x128.png",
   grainUrl = "https://placehold.co/300x300.png",
   behindGradient,
@@ -64,11 +64,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   className = "",
   enableTilt = true,
   miniAvatarUrl,
-  name, // Name prop received but not used for rendering
-  title, 
-  handle = "uditb",
+  // name and title props are received but not used for rendering as per previous requests
+  name, 
+  title,
+  handle = "username",
   status = "Online",
-  contactText = "Contact Me",
+  contactText = "Contact",
   showUserInfo = true,
   onContactClick,
 }) => {
@@ -229,6 +230,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       }
     };
     
+    // Delay initial animation slightly to ensure layout is stable
     const timeoutId = setTimeout(setInitialPosition, 100);
 
 
@@ -287,7 +289,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             <img
               className="avatar"
               src={avatarUrl}
-              alt={`${name || "User"} avatar`}
+              alt={`${handle || "User"} avatar`}
               loading="lazy"
               data-ai-hint="profile avatar"
               onError={(e) => {
@@ -301,7 +303,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   <div className="pc-mini-avatar">
                     <img
                       src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
+                      alt={`${handle || "User"} mini avatar`}
                       loading="lazy"
                       data-ai-hint="profile avatar small"
                       onError={(e) => {
@@ -321,7 +323,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   onClick={handleContactClick}
                   style={{ pointerEvents: "auto" }}
                   type="button"
-                  aria-label={`Contact ${name || "user"}`}
+                  aria-label={`Contact ${handle || "user"}`}
                 >
                   {contactText}
                 </button>
@@ -330,7 +332,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           </div>
           <div className="pc-content">
             <div className="pc-details">
-              {/* Name and Title are removed from here */}
+              {/* Name and Title are not rendered here as per previous requests */}
             </div>
           </div>
         </div>
