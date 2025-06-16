@@ -50,8 +50,8 @@ const ProjectsSection = () => {
                     <Image
                       src={project.imageUrl}
                       alt={project.title}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: 'contain' }}
                       data-ai-hint={project.imageHint}
                       className="rounded-lg"
                     />
@@ -105,4 +105,3 @@ const ProjectsSection = () => {
 };
 
 export default ProjectsSection;
-
