@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// Removed ShadCN Card, CardHeader, CardContent, CardFooter imports as they are replaced by direct CardItems
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { projects as allProjects, projectFilters } from '@/data/portfolioData';
@@ -70,8 +69,10 @@ const ProjectsSection = () => {
                   ))}
                 </div>
 
-                <CardItem as="p" translateZ="20" className="text-muted-foreground text-sm mb-4 flex-grow">
-                   {project.description}
+                <CardItem as="div" translateZ="20" className="mb-4 flex-grow">
+                   <p className="text-muted-foreground text-sm">
+                    {project.description}
+                   </p>
                 </CardItem>
                 
                 <div className="flex justify-end space-x-3 mt-auto pt-4">
@@ -104,3 +105,4 @@ const ProjectsSection = () => {
 };
 
 export default ProjectsSection;
+
