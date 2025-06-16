@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: 'Proctify',
     techStack: ['WebRTC', 'TensorFlow.js', 'React', 'Node.js'],
     description: 'A secure online proctoring platform utilizing dual-camera WebRTC streams and TensorFlow.js for real-time monitoring and anomaly detection. Designed to ensure academic integrity during remote examinations.',
-    imageUrl: 'https://mybucketeer.com/9627598760757695/proctify.png',
+    imageUrl: '/1725785345540.jpeg',
     imageHint: 'online proctoring platform',
     githubLink: 'https://github.com/uditkumar001',
     liveDemoLink: '#',

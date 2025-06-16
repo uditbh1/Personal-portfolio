@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { projects as allProjects, projectFilters } from '@/data/portfolioData';
 import type { Project } from '@/data/portfolioData';
 import { Github, ExternalLink, Filter } from 'lucide-react';
+import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
 
 const ProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState<string>('All');
@@ -41,48 +42,62 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {filteredProjects.map((project: Project) => (
-            <Card key={project.id} className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg bg-card">
-              {project.imageUrl && (
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    data-ai-hint={project.imageHint}
-                  />
-                </div>
-              )}
-              <CardHeader>
-                <CardTitle className="text-2xl font-headline text-primary">{project.title}</CardTitle>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.techStack.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">{tech}</Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription className="text-muted-foreground">{project.description}</CardDescription>
-              </CardContent>
-              <CardFooter className="flex justify-end space-x-2">
-                {project.githubLink && (
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" /> GitHub
-                    </Link>
-                  </Button>
-                )}
-                {project.liveDemoLink && project.liveDemoLink !== "#" && (
-                  <Button variant="default" size="sm" asChild>
-                    <Link href={project.liveDemoLink} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                    </Link>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+            <CardContainer key={project.id} containerClassName="py-0" className="w-full">
+              <CardBody className="bg-card relative group/card w-full h-full rounded-xl p-0 border border-foreground/[0.1] hover:shadow-2xl hover:shadow-primary/[0.1] dark:hover:shadow-accent/[0.1]">
+                <Card className="flex flex-col overflow-hidden shadow-lg transition-shadow duration-300 rounded-lg bg-transparent w-full h-full border-0">
+                  {project.imageUrl && (
+                     <CardItem as="div" translateZ={30} className="relative h-48 w-full rounded-t-lg overflow-hidden">
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.title}
+                        layout="fill"
+                        objectFit="cover"
+                        data-ai-hint={project.imageHint}
+                      />
+                    </CardItem>
+                  )}
+                  <CardHeader className="pt-6 px-6 pb-2">
+                    <CardItem as="div" translateZ="50" className="w-full">
+                      <CardTitle className="text-2xl font-headline text-primary">{project.title}</CardTitle>
+                    </CardItem>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {project.techStack.map((tech) => (
+                        <CardItem key={tech} as="div" translateZ={40} translateX={-2} translateY={-2} className="p-0">
+                           <Badge variant="secondary" className="text-xs">{tech}</Badge>
+                        </CardItem>
+                      ))}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow px-6 pb-4 pt-2">
+                     <CardItem as="div" translateZ="20" className="w-full">
+                       <CardDescription className="text-muted-foreground text-sm">{project.description}</CardDescription>
+                     </CardItem>
+                  </CardContent>
+                  <CardFooter className="flex justify-end space-x-3 px-6 pb-6 pt-2">
+                    {project.githubLink && (
+                      <CardItem as="div" translateZ="30" translateX={-5} translateY={5}>
+                        <Button variant="outline" size="sm" asChild>
+                          <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                            <Github className="mr-2 h-4 w-4" /> GitHub
+                          </Link>
+                        </Button>
+                      </CardItem>
+                    )}
+                    {project.liveDemoLink && project.liveDemoLink !== "#" && (
+                       <CardItem as="div" translateZ="30" translateX={5} translateY={5}>
+                        <Button variant="default" size="sm" asChild>
+                          <Link href={project.liveDemoLink} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+                          </Link>
+                        </Button>
+                      </CardItem>
+                    )}
+                  </CardFooter>
+                </Card>
+              </CardBody>
+            </CardContainer>
           ))}
         </div>
       </div>
