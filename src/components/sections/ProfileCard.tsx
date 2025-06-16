@@ -14,8 +14,8 @@ interface ProfileCardProps {
   className?: string;
   enableTilt?: boolean;
   miniAvatarUrl?: string;
-  name?: string;
-  title?: string; // Title prop is kept for interface consistency, but not rendered
+  name?: string; // Name prop is kept for interface consistency
+  title?: string; 
   handle?: string;
   status?: string;
   contactText?: string;
@@ -64,8 +64,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   className = "",
   enableTilt = true,
   miniAvatarUrl,
-  name = "Udit Bhatnagar",
-  title, // Title prop received but not used for rendering
+  name, // Name prop received but not used for rendering
+  title, 
   handle = "uditb",
   status = "Online",
   contactText = "Contact Me",
@@ -330,8 +330,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           </div>
           <div className="pc-content">
             <div className="pc-details">
-              <h3>{name}</h3>
-              {/* The title <p> tag is removed here */}
+              {/* Name and Title are removed from here */}
             </div>
           </div>
         </div>

@@ -1,16 +1,12 @@
 
 "use client";
 
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Code as CodeIcon, Zap, Award } from 'lucide-react';
 import { keyValues, animatedCountersData } from '@/data/portfolioData';
 import { useEffect, useState } from 'react';
-import ProfileCard from './ProfileCard'; // Import the new ProfileCard
+import ProfileCard from './ProfileCard'; 
 
 const AboutSection = () => {
-  // Themed styles for ProfileCard can be passed as props if needed,
-  // or ProfileCard can use useTheme internally if it needs to adapt.
-  // For now, ProfileCard has its own theme-agnostic styling.
-
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -23,13 +19,12 @@ const AboutSection = () => {
   };
 
   if (!mounted) {
-    // Basic skeleton or placeholder to avoid layout shift and hydration errors
     return (
       <section id="about" className="py-20 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 flex justify-center items-center">
-              <div className="w-[300px] h-[420px] bg-muted rounded-lg animate-pulse"></div> {/* Placeholder for card */}
+              <div className="w-[300px] h-[420px] bg-muted rounded-lg animate-pulse"></div>
             </div>
             <div className="lg:col-span-3">
               <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
@@ -69,22 +64,17 @@ const AboutSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-2 flex justify-center items-center">
-            {/* Replace the old image section with ProfileCard */}
             <ProfileCard
-              name="Udit Bhatia"
-              title="Full Stack Developer"
-              handle="uditb" // Example handle
+              handle="uditb" 
               status="Seeking new opportunities"
               contactText="Get in Touch"
-              avatarUrl="/Adobe Express - file.png" // Your actual avatar image
-              miniAvatarUrl="/Adobe Express - file.png" // Can be same or different
-              iconUrl="https://placehold.co/128x128.png" // Placeholder for card's internal design
-              grainUrl="https://placehold.co/300x300.png" // Placeholder for card's grain texture
-              showUserInfo={false}
+              avatarUrl="/Adobe Express - file.png" 
+              miniAvatarUrl="/Adobe Express - file.png" 
+              iconUrl="https://placehold.co/128x128.png" 
+              grainUrl="https://placehold.co/300x300.png" 
+              showUserInfo={false} // User info bar at the bottom is not shown
               enableTilt={true}
               onContactClick={handleContactClick}
-              // You can add more props here as defined in ProfileCardProps
-              // e.g., behindGradient, innerGradient if you want to customize them
             />
           </div>
           <div className="lg:col-span-3">
@@ -121,6 +111,3 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
-
-
-    
