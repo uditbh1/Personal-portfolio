@@ -8,26 +8,17 @@ interface ProfileCardProps {
   avatarUrl: string;
   iconUrl?: string;
   grainUrl?: string;
-  behindGradient?: string;
-  innerGradient?: string;
-  showBehindGradient?: boolean;
   className?: string;
   enableTilt?: boolean;
   miniAvatarUrl?: string;
-  name?: string; // Kept in interface
-  title?: string; // Kept in interface
+  name?: string; 
+  title?: string; 
   handle?: string;
   status?: string;
   contactText?: string;
   showUserInfo?: boolean;
   onContactClick?: () => void;
 }
-
-const DEFAULT_BEHIND_GRADIENT =
-  "radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)";
-
-const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
 
 const ANIMATION_CONFIG = {
   SMOOTH_DURATION: 600,
@@ -55,21 +46,18 @@ const easeInOutCubic = (x: number): number =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "https://placehold.co/300x300.png", // Default prop value
-  iconUrl = "https://placehold.co/128x128.png",   // Default prop value
-  grainUrl = "https://placehold.co/300x300.png",  // Default prop value
-  behindGradient,
-  innerGradient,
-  showBehindGradient = true,
+  avatarUrl = "https://placehold.co/425x425.png", 
+  iconUrl = "https://placehold.co/128x128.png",   
+  grainUrl = "https://placehold.co/400x400.png",  
   className = "",
   enableTilt = true,
   miniAvatarUrl,
-  name, // Prop received but not rendered
-  title, // Prop received but not rendered
-  handle = "username",
+  name, 
+  title, 
+  handle = "uditb",
   status = "Online",
   contactText = "Contact",
-  showUserInfo = false,
+  showUserInfo = true,
   onContactClick,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -89,7 +77,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const width = card.clientWidth;
       const height = card.clientHeight;
 
-      // Prevent division by zero if width/height are 0
       const percentX = width > 0 ? clamp((100 / width) * offsetX) : 50;
       const percentY = height > 0 ? clamp((100 / height) * offsetY) : 50;
 
@@ -102,11 +89,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         "--pointer-y": `${percentY}%`,
         "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
         "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(centerY, centerX) / 70.71, 0, 1)}`, // Normalize against half diagonal of a square
+        "--pointer-from-center": `${clamp(Math.hypot(centerY, centerX) / 70.71, 0, 1)}`, 
         "--pointer-from-top": `${percentY / 100}`,
         "--pointer-from-left": `${percentX / 100}`,
-        "--rotate-x": `${round(-(centerX / 5))}deg`, // Tilt intensity for X
-        "--rotate-y": `${round(centerY / 4)}deg`,  // Tilt intensity for Y (inverted for natural feel)
+        "--rotate-x": `${round(-(centerX / 5))}deg`, 
+        "--rotate-y": `${round(centerY / 4)}deg`,  
       };
 
       Object.entries(properties).forEach(([property, value]) => {
@@ -217,14 +204,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     const setInitialPosition = () => {
       if (currentWrapRef && currentCardRef && animationHandlers) {
-        // Ensure clientWidth/Height are not 0 before calculating
         if (currentWrapRef.clientWidth > 0 && currentWrapRef.clientHeight > 0) {
             initialX = currentWrapRef.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
             initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
         } else {
-            // Fallback if dimensions are not ready
-            initialX = 200; // Arbitrary fallback
-            initialY = 50;  // Arbitrary fallback
+            initialX = 200; 
+            initialY = 50;  
         }
         
         animationHandlers.updateCardTransform(initialX, initialY, currentCardRef, currentWrapRef);
@@ -272,12 +257,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       ({
         "--icon": iconUrl ? `url(${iconUrl})` : "none",
         "--grain": grainUrl ? `url(${grainUrl})` : "none",
-        "--behind-gradient": showBehindGradient
-          ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT)
-          : "none",
-        "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
       }) as React.CSSProperties,
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
+    [iconUrl, grainUrl]
   );
 
   const handleContactClick = useCallback(() => {
@@ -286,13 +267,13 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
   const handleMainAvatarError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    target.src = 'https://placehold.co/300x300.png?text=Avatar+Error'; // Fallback placeholder
+    target.src = 'https://placehold.co/425x425.png?text=Avatar+Error'; 
     target.alt = 'Error loading avatar. Displaying placeholder.';
   };
 
   const handleMiniAvatarError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    target.src = 'https://placehold.co/48x48.png?text=Error'; // Fallback for mini avatar
+    target.src = 'https://placehold.co/48x48.png?text=Error'; 
     target.alt = 'Error loading mini avatar. Displaying placeholder.';
   };
 
@@ -347,7 +328,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           </div>
           <div className="pc-content">
             <div className="pc-details">
-              {/* Name and Title are not rendered here as per previous requests */}
+              {/* Name and Title are not rendered here */}
             </div>
           </div>
         </div>
