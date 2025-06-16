@@ -38,8 +38,8 @@ const ResumeModal = ({ isOpen, onOpenChange }: ResumeModalProps) => {
             Close
           </Button>
           <Button asChild>
-            <a href={cvPath} download="Udit_Bhatnagar_Resume.pdf">
-              <Download className="mr-2 h-4 w-4" /> Download CV
+          <a href={cvPath} target="_blank" rel="noopener noreferrer">
+              <Download className="mr-2 h-4 w-4" /> View CV
             </a>
           </Button>
         </DialogFooter>

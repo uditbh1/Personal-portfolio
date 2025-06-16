@@ -1,3 +1,4 @@
+
 import { Briefcase, Code, Database, GitFork, Github, GraduationCap, Linkedin, Mail, Phone, LayoutGrid, Wind, Component, Server, ToyBrick, ArrowRightLeft, TerminalSquare, TestTube2, TestTube, CloudUpload, Atom, Route, Network, Palette, FileCode, MapPin, CalendarDays, Building, ExternalLink, Filter, Rss, BookOpen } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -33,8 +34,8 @@ export const projects: Project[] = [
     title: 'Proctify',
     techStack: ['WebRTC', 'TensorFlow.js', 'React', 'Node.js'],
     description: 'A secure online proctoring platform utilizing dual-camera WebRTC streams and TensorFlow.js for real-time monitoring and anomaly detection. Designed to ensure academic integrity during remote examinations.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'proctoring software interface',
+    imageUrl: 'https://mybucketeer.com/9627598760757695/proctify.png',
+    imageHint: 'online proctoring platform',
     githubLink: 'https://github.com/uditkumar001',
     liveDemoLink: '#',
     tags: ['WebRTC', 'AI', 'Security'],
@@ -228,4 +229,5 @@ export const animatedCountersData = [
   { id: 'commits', label: 'Code Commits', value: '1000+' },
 ];
 
-export const cvPath = '/Udit_Resume.pdf';
+export const cvPath = 'https://drive.google.com/file/d/1IeRkPt-mhu-ntoj7jOfudrPPfL_v7oLb/view?usp=sharing';
+
