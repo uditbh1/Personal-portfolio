@@ -24,7 +24,8 @@ const AboutSection = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 flex justify-center items-center">
-              <div className="w-[300px] h-[420px] bg-muted rounded-lg animate-pulse"></div>
+              {/* Updated skeleton to be square */}
+              <div className="w-[300px] h-[300px] bg-muted rounded-lg animate-pulse"></div>
             </div>
             <div className="lg:col-span-3">
               <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
@@ -72,7 +73,7 @@ const AboutSection = () => {
               miniAvatarUrl="/Adobe Express - file.png" 
               iconUrl="https://placehold.co/128x128.png" 
               grainUrl="https://placehold.co/300x300.png" 
-              showUserInfo={false} // User info bar at the bottom is not shown
+              showUserInfo={false} 
               enableTilt={true}
               onContactClick={handleContactClick}
             />
