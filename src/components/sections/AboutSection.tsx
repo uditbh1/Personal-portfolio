@@ -71,7 +71,7 @@ const AboutSection = () => {
           <div className="lg:col-span-2 flex justify-center items-center">
             {/* Replace the old image section with ProfileCard */}
             <ProfileCard
-              name="Udit Bhatnagar"
+              name="Udit Bhatia"
               title="Full Stack Developer"
               handle="uditb" // Example handle
               status="Seeking new opportunities"
@@ -80,7 +80,7 @@ const AboutSection = () => {
               miniAvatarUrl="/Adobe Express - file.png" // Can be same or different
               iconUrl="https://placehold.co/128x128.png" // Placeholder for card's internal design
               grainUrl="https://placehold.co/300x300.png" // Placeholder for card's grain texture
-              showUserInfo={true}
+              showUserInfo={false}
               enableTilt={true}
               onContactClick={handleContactClick}
               // You can add more props here as defined in ProfileCardProps

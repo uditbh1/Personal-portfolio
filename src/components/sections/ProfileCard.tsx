@@ -15,7 +15,7 @@ interface ProfileCardProps {
   enableTilt?: boolean;
   miniAvatarUrl?: string;
   name?: string;
-  title?: string;
+  title?: string; // Title prop is kept for interface consistency, but not rendered
   handle?: string;
   status?: string;
   contactText?: string;
@@ -55,7 +55,7 @@ const easeInOutCubic = (x: number): number =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "https://placehold.co/400x560.png", // Default placeholder
+  avatarUrl = "https://placehold.co/400x560.png", 
   iconUrl = "https://placehold.co/128x128.png",
   grainUrl = "https://placehold.co/300x300.png",
   behindGradient,
@@ -65,7 +65,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   enableTilt = true,
   miniAvatarUrl,
   name = "Udit Bhatnagar",
-  title = "Full Stack Developer",
+  title, // Title prop received but not used for rendering
   handle = "uditb",
   status = "Online",
   contactText = "Contact Me",
@@ -210,7 +210,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     if (!card || !wrap) return;
     
-    // Ensure measurements are taken after the component is fully rendered
     let initialX = 0;
     let initialY = 0;
 
@@ -230,7 +229,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       }
     };
     
-    // Delay slightly to allow layout to stabilize, or use requestAnimationFrame
     const timeoutId = setTimeout(setInitialPosition, 100);
 
 
@@ -333,7 +331,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-content">
             <div className="pc-details">
               <h3>{name}</h3>
-              <p>{title}</p>
+              {/* The title <p> tag is removed here */}
             </div>
           </div>
         </div>
@@ -345,6 +343,3 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 const ProfileCard = React.memo(ProfileCardComponent);
 
 export default ProfileCard;
-
-
-    
