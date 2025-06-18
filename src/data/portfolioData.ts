@@ -37,7 +37,7 @@ export const projects: Project[] = [
     imageUrl: '/Proctify.jpg',
     imageHint: 'AI proctoring system',
     githubLink: 'https://github.com/uditbh1/proctify-',
-    liveDemoLink: 'https://proctify.example.com', // Example valid link
+    liveDemoLink: '#', // Example valid link
     tags: ['AI', 'Security', 'JavaScript', 'Object Detection', 'Full Stack','REST API'],
   },
   {
@@ -244,7 +244,7 @@ export const experiences: Experience[] = [
     company: 'Lifelancer',
     role: 'Frontend Developer Intern',
     period: 'Feb 2022 – Feb 2023',
-    location: 'Remote',
+    location: 'United Kingdom',
     descriptionPoints: [
       'Led the implementation of React.js based user interfaces for key product features.',
       'Utilized UML diagrams for software design and architecture planning.',
@@ -274,8 +274,8 @@ export const education: EducationItem[] = [
     degree: 'MSc Computer Science',
     grade: 'Upper Second Class Honours (2:1)',
     period: '2023 – 2024',
-    description: 'Specialized in advanced software engineering, AI, and data science.',
-    scholarshipImageUrl: 'https://placehold.co/150x100.png',
+    description: 'Specialised in full-stack development, software engineering principles, and AI foundations, with additional focus on functional programming and pervasive systems.',
+    scholarshipImageUrl: '/British-Council-GREAT-1.png',
     scholarshipImageHint: 'scholarship award',
     icon: GraduationCap,
   },
@@ -283,9 +283,9 @@ export const education: EducationItem[] = [
     id: 'ipu',
     institution: 'Indraprastha University (GGSIPU)',
     degree: 'BTech Information Technology',
-    grade: '9.04 GPA',
+    grade: '9.01 GPA',
     period: '2019 – 2023',
-    description: 'Comprehensive study in core computer science and IT principles.',
+    description: 'Specialised in computer systems, network security, and full-stack web development, with strong foundations in algorithms, operating systems, and object-oriented programming.',
     icon: BookOpen,
   },
 ];
@@ -361,8 +361,8 @@ export const contactDetails = {
   email: 'udbtech001@gmail.com',
   phone: '+44 7769980037',
   socials: [
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/uditbhatnagar001/', icon: Linkedin },
-    { name: 'GitHub', url: 'https://github.com/uditkumar001', icon: Github },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/udit121/', icon: Linkedin },
+    { name: 'GitHub', url: 'https://github.com/uditbh1', icon: Github },
   ],
 };
 

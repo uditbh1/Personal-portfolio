@@ -45,7 +45,7 @@ const EducationSection = () => {
                     />
                     <div>
                       <p className="text-sm font-semibold text-accent">Great Scholarship 2024 Recipient</p>
-                      <p className="text-xs text-accent/80">Awarded by the University of Bath</p>
+                      <p className="text-xs text-accent/80">Awarded by the University of Bath (British Council)</p>
                     </div>
                   </div>
                 )}

@@ -18,7 +18,7 @@ const AppFooter = () => {
           ))}
         </div>
         <p className="text-sm">
-          &copy; {currentYear} Udit Bhatnagar. All rights reserved.
+          &copy; {currentYear} Udit Bhatia. All rights reserved.
         </p>
         <p className="text-xs mt-2">
           Built with Next.js, Tailwind CSS, and ShadCN UI.
