@@ -86,7 +86,7 @@ const AboutSection = () => {
               ))}
             </ul>
 
-            <div className="grid sm:grid-cols-3 gap-6 text-center">
+            {/* <div className="grid sm:grid-cols-3 gap-6 text-center">
               {animatedCountersData.map(counter => (
                 <motion.div 
                   key={counter.id} 
@@ -99,7 +99,7 @@ const AboutSection = () => {
                   <p className="text-sm text-muted-foreground mt-1">{counter.label}</p>
                 </motion.div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
