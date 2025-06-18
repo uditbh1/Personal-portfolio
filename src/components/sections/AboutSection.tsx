@@ -65,16 +65,8 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
           <div className="lg:col-span-2 flex justify-center items-start pt-4">
             <ProfileCard
-              handle="uditb"
-              status="Seeking new opportunities"
-              contactText="Get in Touch"
-              avatarUrl="/Adobe Express - file.png"
-              miniAvatarUrl="/Adobe Express - file.png" 
-              iconUrl="https://placehold.co/128x128.png?text=Icon"
-              grainUrl="https://placehold.co/400x400.png?text=Grain"
-              showUserInfo={true}
+              avatarUrl="/udit.png"
               enableTilt={true}
-              onContactClick={handleContactClick}
             />
           </div>
           <div className="lg:col-span-3">
