@@ -33,15 +33,41 @@ const ContactSection = () => {
     },
   });
 
-  // Placeholder submit handler
   async function onSubmit(data: ContactFormValues) {
-    // In a real app, you'd send this data to a backend API
-    console.log("Form submitted:", data);
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    form.reset(); // Reset form after submission
+    form.control.disabled = true; // Disable form while submitting
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast({
+          title: "Message Sent!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error Sending Message",
+          description: result.error || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error Sending Message",
+        description: "Could not connect to the server. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      form.control.disabled = false; // Re-enable form
+    }
   }
 
   return (
@@ -106,7 +132,7 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel>Full Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your Name" {...field} className="bg-background" />
+                          <Input placeholder="Your Name" {...field} className="bg-background" disabled={form.formState.isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -119,7 +145,7 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel>Email Address</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="your.email@example.com" {...field} className="bg-background" />
+                          <Input type="email" placeholder="your.email@example.com" {...field} className="bg-background" disabled={form.formState.isSubmitting}/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -132,7 +158,7 @@ const ContactSection = () => {
                       <FormItem>
                         <FormLabel>Message</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Your message..." rows={5} {...field} className="bg-background" />
+                          <Textarea placeholder="Your message..." rows={5} {...field} className="bg-background" disabled={form.formState.isSubmitting}/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
