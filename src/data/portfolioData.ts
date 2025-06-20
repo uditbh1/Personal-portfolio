@@ -228,7 +228,7 @@ export const experiences: Experience[] = [
   {
     id: 'newgen',
     company: 'Newgen Soft Pvt. Ltd.',
-    role: 'Software Developer Intern',
+    role: 'Software Developer',
     period: 'Feb 2023 – Aug 2023',
     location: 'Noida, India',
     descriptionPoints: [
@@ -242,7 +242,7 @@ export const experiences: Experience[] = [
   {
     id: 'lifelancer',
     company: 'Lifelancer',
-    role: 'Frontend Developer Intern',
+    role: 'Frontend Developer',
     period: 'Feb 2022 – Feb 2023',
     location: 'United Kingdom',
     descriptionPoints: [
