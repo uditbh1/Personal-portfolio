@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { skillsData } from '@/data/portfolioData';
 import type { SkillCategory, Skill } from '@/data/portfolioData';
@@ -20,10 +21,13 @@ const SkillsSection = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="flex flex-wrap gap-3">
                   {category.skills.map((skill: Skill) => (
-                    <div key={skill.id} className="flex items-center p-2 rounded-md hover:bg-secondary transition-colors">
-                      <skill.icon className="h-5 w-5 mr-2 text-primary" />
+                    <div
+                      key={skill.id}
+                      className="flex items-center p-3 rounded-lg bg-secondary border border-transparent hover:border-primary transition-colors duration-300"
+                    >
+                      <skill.icon className="h-5 w-5 mr-2.5 text-primary" />
                       <span className="text-sm font-medium text-foreground">{skill.name}</span>
                     </div>
                   ))}
@@ -38,3 +42,5 @@ const SkillsSection = () => {
 };
 
 export default SkillsSection;
+
+    

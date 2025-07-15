@@ -1,5 +1,5 @@
 
-import { Briefcase, Code as CodeIcon, Database, GitFork, Github, GraduationCap, Linkedin, Mail, Phone, LayoutGrid, Wind, Component, Server, ToyBrick, ArrowRightLeft, TerminalSquare, TestTube2, TestTube, CloudUpload, Atom, Route, Network, Palette, FileCode, MapPin, CalendarDays, Building, ExternalLink, Filter, Rss, BookOpen, Zap, Award } from 'lucide-react';
+import { Briefcase, Code as CodeIcon, Database, GitFork, Github, GraduationCap, Linkedin, Mail, Phone, LayoutGrid, Wind, Component, Server, ToyBrick, ArrowRightLeft, TerminalSquare, TestTube2, TestTube, CloudUpload, Atom, Route, Network, Palette, FileCode, MapPin, CalendarDays, Building, ExternalLink, Filter, Rss, BookOpen, Zap, Award, ServerCog, Cog, Box } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export interface NavItem {
@@ -347,6 +347,7 @@ export const skillsData: SkillCategory[] = [
     name: 'Frameworks & Libraries',
     skills: [
       { id: 'react', name: 'React.js', level: 90, icon: Atom },
+      { id: 'nextjs', name: 'Next.js', level: 85, icon: ServerCog },
       { id: 'router', name: 'React Router', level: 85, icon: Route },
       { id: 'axios', name: 'Axios', level: 80, icon: Network },
       { id: 'tailwind', name: 'Tailwind CSS', level: 90, icon: Wind },
@@ -376,11 +377,14 @@ export const skillsData: SkillCategory[] = [
   },
   {
     id: 'deployment',
-    name: 'Deployment',
+    name: 'Deployment & DevOps',
     skills: [
+      { id: 'cicd', name: 'CI/CD', level: 75, icon: Cog },
+      { id: 'docker', name: 'Docker', level: 70, icon: Box },
+      { id: 'aws', name: 'AWS', level: 65, icon: CloudUpload },
+      { id: 'azure', name: 'MS Azure', level: 70, icon: CloudUpload },
       { id: 'netlify', name: 'Netlify', level: 75, icon: CloudUpload },
       { id: 'vercel', name: 'Vercel', level: 80, icon: CloudUpload },
-      { id: 'azure', name: 'MS Azure', level: 70, icon: CloudUpload },
     ],
   },
 ];
@@ -406,5 +410,7 @@ export const animatedCountersData = [
 
 export const cvPath = 'https://drive.google.com/file/d/1IeRkPt-mhu-ntoj7jOfudrPPfL_v7oLb/view?usp=sharing';
 
+
+    
 
     
