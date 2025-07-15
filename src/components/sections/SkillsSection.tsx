@@ -28,9 +28,8 @@ const SkillsSection = () => {
                         <skill.icon className="h-5 w-5 mr-2 text-primary" />
                         <span>{skill.name}</span>
                       </div>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
                     </div>
-                    <Progress value={skill.level} className="h-2" aria-label={`${skill.name} proficiency ${skill.level}%`} />
+                    <Progress value={skill.level} className="h-2" aria-label={`${skill.name} proficiency`} />
                   </div>
                 ))}
               </CardContent>
