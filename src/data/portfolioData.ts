@@ -264,23 +264,23 @@ export const experiences: Experience[] = [
     ],
     icon: Rss,
   },
-  {
-    id:'indore Innovation Hub Pvt.Ltd',
-    company:'Indore Innovation Hub Pvt.Ltd',
-    role:'Software Developer',
-    period:'Jan 2021 – Jan 2022',
-    location:'Indore, India',
-    descriptionPoints:[
-    "Designed, developed, and maintained scalable web applications using modern frameworks such as React and Node.js to meet business and user requirements.",
-    "Collaborated with cross-functional teams including design, QA, and DevOps in Agile/Scrum environments to deliver high-quality software on schedule.",
-    "Wrote clean, efficient, and well-documented code; implemented unit and integration tests to ensure code quality and reliability.",
-    "Designed REST APIs and deployed containerised services using Docker and Kubernetes.",
-    "Applied BDD/TDD practices and automated testing using tools like Playwright and Postman.",
-    "Experienced with CI/CD pipelines, version control (Git), and build tools like Maven.",
-    "Deployed applications on cloud platforms such as AWS and Azure."
-  ],
-    icon: Building,
-  }
+  // {
+  //   id:'indore Innovation Hub Pvt.Ltd',
+  //   company:'Indore Innovation Hub Pvt.Ltd',
+  //   role:'Software Developer',
+  //   period:'Jan 2021 – Jan 2022',
+  //   location:'Indore, India',
+  //   descriptionPoints:[
+  //   "Designed, developed, and maintained scalable web applications using modern frameworks such as React and Node.js to meet business and user requirements.",
+  //   "Collaborated with cross-functional teams including design, QA, and DevOps in Agile/Scrum environments to deliver high-quality software on schedule.",
+  //   "Wrote clean, efficient, and well-documented code; implemented unit and integration tests to ensure code quality and reliability.",
+  //   "Designed REST APIs and deployed containerised services using Docker and Kubernetes.",
+  //   "Applied BDD/TDD practices and automated testing using tools like Playwright and Postman.",
+  //   "Experienced with CI/CD pipelines, version control (Git), and build tools like Maven.",
+  //   "Deployed applications on cloud platforms such as AWS and Azure."
+  // ],
+  //   icon: Building,
+  // }
 ];
 
 export interface EducationItem {

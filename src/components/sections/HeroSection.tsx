@@ -67,9 +67,9 @@ const HeroSection = () => {
                                                   : 'text-white border-neutral-700 hover:bg-neutral-800 hover:border-neutral-600'}`}
             suppressHydrationWarning
           >
-            <a href={cvPath} target="_blank" rel="noopener noreferrer">
+            {/* <a href={cvPath} target="_blank" rel="noopener noreferrer">
               View CV <Download className="ml-2 h-5 w-5" />
-            </a>
+            </a> */}
           </Button>
         </div>
       </div>
