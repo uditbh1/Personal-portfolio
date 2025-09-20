@@ -3,6 +3,30 @@ import { Briefcase, Code as CodeIcon, Database, GitFork, Github, GraduationCap, 
 import type { LucideProps } from 'lucide-react';
 import { IoLogoJavascript } from "react-icons/io5";
 import type { ElementType } from 'react';
+import { FaHtml5 } from "react-icons/fa";
+import { FaCss3Alt } from "react-icons/fa";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { FaReact } from "react-icons/fa";
+import { RiNextjsFill, RiNodejsFill } from "react-icons/ri";
+import { SiDocker, SiGit, SiGithub, SiNpm, SiReactrouter } from "react-icons/si";
+import { SiAxios } from "react-icons/si";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { FaBootstrap } from "react-icons/fa";
+import { SiCssmodules } from "react-icons/si";
+import { FaNodeJs } from "react-icons/fa";
+import { SiExpress } from "react-icons/si";
+import { FaGitAlt } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
+import { SiPostman } from "react-icons/si";
+import { FaNpm } from "react-icons/fa";
+import { VscVscode } from "react-icons/vsc";
+import { SiJest } from "react-icons/si";
+import { FaDocker } from "react-icons/fa";
+import { FaAws } from "react-icons/fa";
+import { VscAzure } from "react-icons/vsc";
+import { BiLogoNetlify } from "react-icons/bi";
+import { IoLogoVercel } from "react-icons/io5";
+import { SiRedux } from "react-icons/si";
 
 export interface NavItem {
   label: string;
@@ -339,41 +363,44 @@ export const skillsData: SkillCategory[] = [
     name: 'Languages',
     skills: [
       { id: 'js', name: 'JavaScript (ES6+)', level: 90, icon: IoLogoJavascript },
-      { id: 'html', name: 'HTML5', level: 95, icon: FileCode },
-      { id: 'css', name: 'CSS3', level: 90, icon: Palette },
-      { id: 'sql', name: 'SQL (PostgreSQL)', level: 75, icon: Database },
+      { id: 'html', name: 'HTML5', level: 95, icon: FaHtml5 },
+      { id: 'css', name: 'CSS3', level: 90, icon: FaCss3Alt },
+      { id: 'sql', name: 'SQL (PostgreSQL)', level: 75, icon: BiLogoPostgresql },
     ],
   },
   {
     id: 'frameworks',
     name: 'Frameworks & Libraries',
     skills: [
-      { id: 'react', name: 'React.js', level: 90, icon: Atom },
-      { id: 'nextjs', name: 'Next.js', level: 85, icon: ServerCog },
-      { id: 'router', name: 'React Router', level: 85, icon: Route },
-      { id: 'axios', name: 'Axios', level: 80, icon: Network },
-      { id: 'tailwind', name: 'Tailwind CSS', level: 90, icon: Wind },
-      { id: 'bootstrap', name: 'Bootstrap', level: 80, icon: LayoutGrid },
-      { id: 'cssmodules', name: 'CSS Modules', level: 75, icon: Component },
+      { id: 'react', name: 'React.js', level: 90, icon: FaReact},
+      { id: 'redux', name: 'Redux', level: 85, icon: SiRedux},
+      { id: 'nextjs', name: 'Next.js', level: 85, icon: RiNextjsFill },
+      { id: 'router', name: 'React Router', level: 85, icon: SiReactrouter },
+      { id: 'axios', name: 'Axios', level: 80, icon: SiAxios },
+      { id: 'tailwind', name: 'Tailwind CSS', level: 90, icon: RiTailwindCssFill },
+      { id: 'bootstrap', name: 'Bootstrap', level: 80, icon: FaBootstrap },
+      { id: 'cssmodules', name: 'CSS Modules', level: 75, icon: SiCssmodules },
     ],
   },
   {
     id: 'backend',
     name: 'Backend & Tools',
     skills: [
-      { id: 'node', name: 'Node.js', level: 80, icon: Server },
-      { id: 'express', name: 'Express.js', level: 75, icon: ToyBrick },
+      { id: 'node', name: 'Node.js', level: 80, icon: RiNodejsFill },
+      { id: 'express', name: 'Express.js', level: 75, icon: SiExpress },
       { id: 'rest', name: 'REST APIs', level: 85, icon: ArrowRightLeft },
-      { id: 'git', name: 'Git', level: 90, icon: GitFork },
-      { id: 'github', name: 'GitHub', level: 90, icon: Github },
-      { id: 'postman', name: 'Postman', level: 85, icon: TerminalSquare },
+      { id: 'git', name: 'Git', level: 90, icon: SiGit },
+      { id: 'github', name: 'GitHub', level: 90, icon: SiGithub },
+      { id: 'postman', name: 'Postman', level: 85, icon: SiPostman },
+      { id: 'npm', name: 'npm', level: 85, icon: SiNpm },
+      { id: 'VScode', name: 'VScode', level: 85, icon: VscVscode },
     ],
   },
   {
     id: 'testing',
     name: 'Testing',
     skills: [
-      { id: 'jest', name: 'Jest', level: 80, icon: TestTube2 },
+      { id: 'jest', name: 'Jest', level: 80, icon: SiJest },
       { id: 'rtl', name: 'React Testing Library', level: 80, icon: TestTube },
     ],
   },
@@ -382,11 +409,11 @@ export const skillsData: SkillCategory[] = [
     name: 'Deployment & DevOps',
     skills: [
       { id: 'cicd', name: 'CI/CD', level: 75, icon: Cog },
-      { id: 'docker', name: 'Docker', level: 70, icon: Box },
-      { id: 'aws', name: 'AWS', level: 65, icon: CloudUpload },
-      { id: 'azure', name: 'MS Azure', level: 70, icon: CloudUpload },
-      { id: 'netlify', name: 'Netlify', level: 75, icon: CloudUpload },
-      { id: 'vercel', name: 'Vercel', level: 80, icon: CloudUpload },
+      { id: 'docker', name: 'Docker', level: 70, icon: SiDocker },
+      { id: 'aws', name: 'AWS', level: 65, icon: FaAws },
+      { id: 'azure', name: 'MS Azure', level: 70, icon: VscAzure },
+      { id: 'netlify', name: 'Netlify', level: 75, icon: BiLogoNetlify },
+      { id: 'vercel', name: 'Vercel', level: 80, icon: IoLogoVercel },
     ],
   },
 ];

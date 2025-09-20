@@ -9,6 +9,7 @@ import { projects as allProjects, projectFilters } from '@/data/portfolioData';
 import type { Project } from '@/data/portfolioData';
 import { Github, ExternalLink, Filter } from 'lucide-react';
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card';
+import { FaGithub } from "react-icons/fa";
 
 const ProjectsSection = () => {
   const [activeFilter, setActiveFilter] = useState<string>('All');
@@ -82,7 +83,7 @@ const ProjectsSection = () => {
                     <CardItem as="div" translateZ="30" translateX={-5} translateY={5}>
                       <Button variant="outline" size="sm" asChild className="shadow-md">
                         <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                          <Github className="mr-2 h-4 w-4" /> GitHub
+                          <FaGithub className="mr-2 h-4 w-4" /> GitHub
                         </Link>
                       </Button>
                     </CardItem>
