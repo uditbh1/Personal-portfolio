@@ -3,7 +3,7 @@ import { Briefcase, Code as CodeIcon, Database, GitFork, Github, GraduationCap, 
 import type { LucideProps } from 'lucide-react';
 import { IoLogoJavascript } from "react-icons/io5";
 import type { ElementType } from 'react';
-import { FaHtml5 } from "react-icons/fa";
+import { FaHtml5, FaLinkedinIn } from "react-icons/fa";
 import { FaCss3Alt } from "react-icons/fa";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { FaReact } from "react-icons/fa";
@@ -422,8 +422,8 @@ export const contactDetails = {
   email: 'udbtech001@gmail.com',
   phone: '+44 7769980037',
   socials: [
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/udit121/', icon: Linkedin },
-    { name: 'GitHub', url: 'https://github.com/uditbh1', icon: Github },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/udit121/', icon: FaLinkedinIn},
+    { name: 'GitHub', url: 'https://github.com/uditbh1', icon: FaGithub },
   ],
 };
 
