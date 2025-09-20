@@ -1,6 +1,8 @@
 
 import { Briefcase, Code as CodeIcon, Database, GitFork, Github, GraduationCap, Linkedin, Mail, Phone, LayoutGrid, Wind, Component, Server, ToyBrick, ArrowRightLeft, TerminalSquare, TestTube2, TestTube, CloudUpload, Atom, Route, Network, Palette, FileCode, MapPin, CalendarDays, Building, ExternalLink, Filter, Rss, BookOpen, Zap, Award, ServerCog, Cog, Box } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+import { IoLogoJavascript } from "react-icons/io5";
+import type { ElementType } from 'react';
 
 export interface NavItem {
   label: string;
@@ -221,7 +223,7 @@ export interface Experience {
   period: string;
   location: string;
   descriptionPoints: string[];
-  icon?: LucideIcon;
+  icon?: ElementType;
 }
 
 export const experiences: Experience[] = [
@@ -264,23 +266,23 @@ export const experiences: Experience[] = [
     ],
     icon: Rss,
   },
-  // {
-  //   id:'indore Innovation Hub Pvt.Ltd',
-  //   company:'Indore Innovation Hub Pvt.Ltd',
-  //   role:'Software Developer',
-  //   period:'Jan 2021 – Jan 2022',
-  //   location:'Indore, India',
-  //   descriptionPoints:[
-  //   "Designed, developed, and maintained scalable web applications using modern frameworks such as React and Node.js to meet business and user requirements.",
-  //   "Collaborated with cross-functional teams including design, QA, and DevOps in Agile/Scrum environments to deliver high-quality software on schedule.",
-  //   "Wrote clean, efficient, and well-documented code; implemented unit and integration tests to ensure code quality and reliability.",
-  //   "Designed REST APIs and deployed containerised services using Docker and Kubernetes.",
-  //   "Applied BDD/TDD practices and automated testing using tools like Playwright and Postman.",
-  //   "Experienced with CI/CD pipelines, version control (Git), and build tools like Maven.",
-  //   "Deployed applications on cloud platforms such as AWS and Azure."
-  // ],
-  //   icon: Building,
-  // }
+  {
+    id:'indore Innovation Hub Pvt.Ltd',
+    company:'Indore Innovation Hub Pvt.Ltd',
+    role:'Software Developer',
+    period:'Jan 2021 – Jan 2022',
+    location:'Indore, India',
+    descriptionPoints:[
+    "Designed, developed, and maintained scalable web applications using modern frameworks such as React and Node.js to meet business and user requirements.",
+    "Collaborated with cross-functional teams including design, QA, and DevOps in Agile/Scrum environments to deliver high-quality software on schedule.",
+    "Wrote clean, efficient, and well-documented code; implemented unit and integration tests to ensure code quality and reliability.",
+    "Designed REST APIs and deployed containerised services using Docker and Kubernetes.",
+    "Applied BDD/TDD practices and automated testing using tools like Playwright and Postman.",
+    "Experienced with CI/CD pipelines, version control (Git), and build tools like Maven.",
+    "Deployed applications on cloud platforms such as AWS and Azure."
+  ],
+    icon: Building,
+  }
 ];
 
 export interface EducationItem {
@@ -292,7 +294,7 @@ export interface EducationItem {
   description?: string;
   scholarshipImageUrl?: string;
   scholarshipImageHint?: string;
-  icon?: LucideIcon;
+  icon?: ElementType;
 }
 
 export const education: EducationItem[] = [
@@ -328,7 +330,7 @@ export interface Skill {
   id: string;
   name: string;
   level: number; // Percentage 0-100
-  icon: LucideIcon;
+  icon: ElementType;
 }
 
 export const skillsData: SkillCategory[] = [
@@ -336,7 +338,7 @@ export const skillsData: SkillCategory[] = [
     id: 'languages',
     name: 'Languages',
     skills: [
-      { id: 'js', name: 'JavaScript (ES6+)', level: 90, icon: CodeIcon },
+      { id: 'js', name: 'JavaScript (ES6+)', level: 90, icon: IoLogoJavascript },
       { id: 'html', name: 'HTML5', level: 95, icon: FileCode },
       { id: 'css', name: 'CSS3', level: 90, icon: Palette },
       { id: 'sql', name: 'SQL (PostgreSQL)', level: 75, icon: Database },
@@ -414,3 +416,4 @@ export const cvPath = 'https://drive.google.com/file/d/1IeRkPt-mhu-ntoj7jOfudrPP
     
 
     
+
