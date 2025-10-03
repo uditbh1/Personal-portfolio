@@ -1,11 +1,28 @@
+
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { experiences } from '@/data/portfolioData';
 import type { Experience } from '@/data/portfolioData';
 import { Briefcase, MapPin, CalendarDays, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ExperienceSection = () => {
+
+  const itemVariants = (direction: 'left' | 'right') => ({
+    hidden: { opacity: 0, x: direction === 'left' ? -100 : 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: 'easeOut',
+      },
+    },
+  });
+
   return (
-    <section id="experience" className="py-20 bg-background">
+    <section id="experience" className="py-20 bg-background overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold font-headline uppercase tracking-wider text-primary mb-12 text-center">
           Work Experience
@@ -15,7 +32,15 @@ const ExperienceSection = () => {
           <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-border -translate-x-1/2"></div>
 
           {experiences.map((exp: Experience, index: number) => (
-            <div key={exp.id} className={`mb-12 flex md:items-center w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+            <motion.div
+              key={exp.id}
+              className={`mb-12 flex md:items-center w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
+              custom={index % 2 === 0 ? 'right' : 'left'}
+              variants={itemVariants(index % 2 === 0 ? 'right' : 'left')}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <div className="hidden md:block w-1/2"></div>
               <div className="hidden md:block relative">
                 {/* Timeline dot */}
@@ -52,7 +77,7 @@ const ExperienceSection = () => {
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

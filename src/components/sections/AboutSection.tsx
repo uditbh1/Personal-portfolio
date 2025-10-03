@@ -11,11 +11,29 @@ const AboutSection = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const sectionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: (direction: 'left' | 'right') => ({
+      opacity: 0,
+      x: direction === 'left' ? -100 : 100,
+    }),
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
   };
 
   if (!mounted) {
@@ -25,7 +43,7 @@ const AboutSection = () => {
           <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
             <div className="lg:col-span-2 flex justify-center items-start pt-4">
               {/* Skeleton loader for ProfileCard */}
-              <div className="w-[425px] h-[425px] bg-muted rounded-lg animate-pulse"></div>
+              <div className="w-full max-w-[425px] h-[425px] bg-muted rounded-lg animate-pulse"></div>
             </div>
             <div className="lg:col-span-3">
               <div className="h-10 bg-muted rounded w-1/2 mb-6 animate-pulse"></div>
@@ -43,15 +61,6 @@ const AboutSection = () => {
                   </div>
                 ))}
               </div>
-              <div className="grid sm:grid-cols-3 gap-6 text-center">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="p-6 bg-card shadow-md rounded-lg">
-                    <div className="h-10 w-10 bg-muted rounded-full mx-auto mb-3 animate-pulse"></div>
-                    <div className="h-8 bg-muted rounded w-1/2 mx-auto animate-pulse"></div>
-                    <div className="h-4 bg-muted rounded w-3/4 mx-auto mt-1 animate-pulse"></div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -60,21 +69,36 @@ const AboutSection = () => {
   }
 
   return (
-    <section id="about" className="py-20 bg-secondary">
+    <motion.section
+      id="about"
+      className="py-20 bg-secondary"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-12 items-start lg:items-center">
-          <div className="lg:col-span-2 flex justify-center items-start pt-4">
+          <motion.div
+            className="lg:col-span-2 flex justify-center items-start pt-4"
+            custom="left"
+            variants={itemVariants}
+          >
             <ProfileCard
               avatarUrl="/udit.png"
               enableTilt={true}
             />
-          </div>
-          <div className="lg:col-span-3">
+          </motion.div>
+          <motion.div
+            className="lg:col-span-3"
+            custom="right"
+            variants={itemVariants}
+          >
             <h2 className="text-4xl font-bold font-headline uppercase tracking-wider text-primary mb-6">
               About Me
             </h2>
             <p className="text-lg text-foreground mb-6 leading-relaxed">
-              I am a passionate and results-oriented Full Stack Developer with a Master&apos;s degree in Computer Science from the University of Bath. With a strong foundation in modern web technologies and a keen eye for detail, I specialize in creating responsive, user-friendly, and high-performance web applications. My approach to development is rooted in best practices like TDD and component-based architecture, ensuring scalable and maintainable code.
+              I am a passionate and results-oriented Full Stack Developer with a Master's degree in Computer Science from the University of Bath. With a strong foundation in modern web technologies and a keen eye for detail, I specialize in creating responsive, user-friendly, and high-performance web applications. My approach to development is rooted in best practices like TDD and component-based architecture, ensuring scalable and maintainable code.
             </p>
             <h3 className="text-2xl font-semibold font-headline text-primary mb-4">Key Values</h3>
             <ul className="space-y-3 mb-8">
@@ -85,25 +109,10 @@ const AboutSection = () => {
                 </li>
               ))}
             </ul>
-
-            {/* <div className="grid sm:grid-cols-3 gap-6 text-center">
-              {animatedCountersData.map(counter => (
-                <motion.div 
-                  key={counter.id} 
-                  className="p-6 bg-card shadow-md rounded-lg transition-shadow duration-300 hover:shadow-xl"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {counter.icon && <counter.icon className="h-10 w-10 text-primary mx-auto mb-3" />}
-                  <p className="text-3xl font-bold text-primary">{counter.value}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{counter.label}</p>
-                </motion.div>
-              ))}
-            </div> */}
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
