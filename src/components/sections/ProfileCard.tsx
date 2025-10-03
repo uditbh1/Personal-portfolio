@@ -1,3 +1,4 @@
+
 "use client";
 import React, {
   useRef,
@@ -6,6 +7,7 @@ import React, {
   useMemo,
   CSSProperties,
 } from "react";
+import Image from 'next/image';
 import { useTheme } from "next-themes";
 import "./ProfileCard.css";
 
@@ -252,11 +254,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-            <img
+          <Image
+              priority
               className="avatar"
               src={avatarUrl}
               alt={`${name} avatar`}
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'contain', objectPosition: 'bottom' }}
               onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
             />
             {showUserInfo && (
@@ -304,3 +309,5 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
 const ProfileCard = React.memo(ProfileCardComponent);
 export default ProfileCard;
+
+    
