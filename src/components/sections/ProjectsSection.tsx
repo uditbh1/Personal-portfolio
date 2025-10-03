@@ -42,17 +42,43 @@ const ProjectsSection = () => {
     },
   };
 
+  const headerVariants = {
+    hidden: { opacity: 0, y: -40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold font-headline uppercase tracking-wider text-primary mb-4 text-center">
-          Projects Showcase
-        </h2>
-        <p className="text-lg text-muted-foreground mb-12 text-center max-w-2xl mx-auto">
-          A selection of my work, demonstrating skills in various technologies and problem domains.
-        </p>
+        <motion.div
+          className="text-center mb-12"
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="text-4xl font-bold font-headline uppercase tracking-wider text-primary mb-4">
+            Projects Showcase
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A selection of my work, demonstrating skills in various technologies and problem domains.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <motion.div
+          className="flex flex-wrap justify-center gap-2 mb-12"
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {projectFilters.map(filter => (
             <Button
               key={filter}
@@ -64,7 +90,7 @@ const ProjectsSection = () => {
               {filter}
             </Button>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start"
