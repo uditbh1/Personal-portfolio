@@ -259,9 +259,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               className="avatar"
               src={avatarUrl}
               alt={`${name} avatar`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ objectFit: 'contain', objectPosition: 'bottom' }}
+              width={500}
+              height={500}
+              style={{ 
+                objectFit: 'contain', 
+                objectPosition: 'bottom',
+                width: '100%',
+                height: 'auto',
+              }}
               onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
             />
             {showUserInfo && (
@@ -309,5 +314,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
 const ProfileCard = React.memo(ProfileCardComponent);
 export default ProfileCard;
+
+    
 
     
