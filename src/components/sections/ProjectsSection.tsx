@@ -93,6 +93,7 @@ const ProjectsSection = () => {
         </motion.div>
 
         <motion.div
+          key={activeFilter}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start"
           variants={containerVariants}
           initial="hidden"

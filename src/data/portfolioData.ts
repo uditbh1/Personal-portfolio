@@ -56,6 +56,57 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'whatsapp-rag-bot',
+    title: 'WhatsApp RAG Bot',
+    techStack: [
+      'Node.js',
+      'Express.js',
+      'WhatsApp Cloud API',
+      'Pinecone',
+      'OpenRouter',
+      'RAG',
+      'Vector Databases'
+    ],
+    description: 'An AI-powered WhatsApp chatbot built with a Retrieval-Augmented Generation pipeline. Uses Pinecone for vector storage and semantic search with top-6 context retrieval, and OpenRouter for LLM inference. Supports per-user conversation memory and automated message embedding to deliver more personalised, context-aware responses.',
+    imageUrl: '/WhatsAppRAGBot.png',
+    imageHint: 'AI WhatsApp chatbot with RAG pipeline',
+    githubLink: 'https://github.com/uditbh1/WhatsappCloudAPI',
+    liveDemoLink: '#',
+    tags: [
+      'AI',
+      'RAG',
+      'Chatbot',
+      'Backend',
+      'Node.js',
+      'Vector Search'
+    ],
+  },
+  {
+    id: 'triageassist',
+    title: 'TriageAssist',
+    techStack: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'ShadCN/UI',
+      'React Hook Form',
+      'OpenRouter AI'
+    ],
+    description: 'An AI-powered support ticket triage platform that automatically categorises and prioritises incoming tickets. Built with Next.js and TypeScript, it uses OpenRouter AI to reduce manual triage effort by over 95% and improve response times for high-priority issues by an estimated 50%.',
+    imageUrl: '/TriageAssist.jpg',
+    imageHint: 'AI support ticket triage dashboard',
+    githubLink: 'https://github.com/uditbh1/Triage-Dashboard',
+    liveDemoLink: 'https://triagedashboard.netlify.app/',
+    tags: [
+      'AI',
+      'Full Stack',
+      'Next.js',
+      'TypeScript',
+      'Automation',
+      'Productivity'
+    ],
+  },  
+  {
     id: 'proctify',
     title: 'Proctify',
     techStack: ['TensorFlow.js', 'WebRTC', 'Node.js', 'MongoDB', 'Socket.IO'],
