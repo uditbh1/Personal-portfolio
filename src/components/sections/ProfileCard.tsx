@@ -254,15 +254,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
-          <Image
-              priority
+           <img
               className="avatar"
               src={avatarUrl}
               alt={`${name} avatar`}
               width={500}
               height={500}
-              style={{ 
-                objectFit: 'contain', 
+              style={{
+                objectFit: 'contain',
                 objectPosition: 'bottom',
                 width: '100%',
                 height: 'auto',
@@ -314,7 +313,3 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
 const ProfileCard = React.memo(ProfileCardComponent);
 export default ProfileCard;
-
-    
-
-    
