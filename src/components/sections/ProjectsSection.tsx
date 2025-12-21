@@ -97,7 +97,7 @@ const ProjectsSection = () => {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
           {filteredProjects.map((project: Project) => (
