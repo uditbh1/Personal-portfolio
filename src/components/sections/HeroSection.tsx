@@ -31,7 +31,7 @@ const HeroSection = () => {
           background="transparent"
           minSize={0.6}
           maxSize={1.6}
-          particleDensity={150}
+          particleDensity={100}
           className="w-full h-full"
           particleColor={particleColor}
           speed={2}
@@ -39,10 +39,10 @@ const HeroSection = () => {
       </div>
       
       <div className={`relative z-10 container mx-auto px-4 sm:px-6 lg:px-8`}>
-        <h1 className={`text-5xl md:text-7xl font-bold font-headline uppercase tracking-tighter mb-6 animate-fade-in-up ${textColor}`}>
+        <h1 className={`text-4xl sm:text-5xl md:text-7xl font-bold font-headline uppercase tracking-tighter mb-4 sm:mb-6 animate-fade-in-up ${textColor}`}>
           Hi, I&apos;m <span className={accentSpanColor}>Udit</span>
         </h1>
-        <p className={`text-2xl md:text-3xl ${subTextColor} mb-10 animate-fade-in-up animation-delay-200`}>
+        <p className={`text-xl sm:text-2xl md:text-3xl ${subTextColor} mb-8 sm:mb-10 animate-fade-in-up animation-delay-200`}>
           A Full Stack Developer
         </p>
         <div className="space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center items-center animate-fade-in-up animation-delay-400">
@@ -67,9 +67,9 @@ const HeroSection = () => {
                                                   : 'text-white border-neutral-700 hover:bg-neutral-800 hover:border-neutral-600'}`}
             suppressHydrationWarning
           >
-            {/* <a href={cvPath} target="_blank" rel="noopener noreferrer">
+            <a href={cvPath} target="_blank" rel="noopener noreferrer">
               View CV <Download className="ml-2 h-5 w-5" />
-            </a> */}
+            </a>
           </Button>
         </div>
       </div>
