@@ -19,16 +19,6 @@ const ProjectsSection = () => {
     ? allProjects
     : allProjects.filter(project => project.tags.includes(activeFilter));
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: {
@@ -92,16 +82,18 @@ const ProjectsSection = () => {
           ))}
         </motion.div>
 
-        <motion.div
+        <div
           key={activeFilter}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
         >
           {filteredProjects.map((project: Project) => (
-            <motion.div key={project.id} variants={itemVariants}>
+            <motion.div
+              key={project.id}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
               <CardContainer containerClassName="w-full h-full" className="w-full h-full">
                 <CardBody className="bg-card relative group/card w-full h-full rounded-xl p-6 border border-card-foreground/10 hover:shadow-2xl hover:shadow-primary/[0.1] dark:hover:shadow-accent/[0.1] flex flex-col">
                   {project.imageUrl && (
@@ -158,7 +150,7 @@ const ProjectsSection = () => {
               </CardContainer>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
