@@ -58,7 +58,7 @@ const HeroSection = () => {
               View Projects <ArrowRight className="ml-2 h-5 w-5" />
             </a>
           </Button>
-          <Button
+          {/* <Button
             variant="outline"
             size="lg"
             asChild
@@ -70,7 +70,7 @@ const HeroSection = () => {
             <a href={cvPath} target="_blank" rel="noopener noreferrer">
               View CV <Download className="ml-2 h-5 w-5" />
             </a>
-          </Button>
+          </Button> */}
         </div>
       </div>
       <style jsx>{`
