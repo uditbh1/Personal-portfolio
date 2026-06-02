@@ -326,15 +326,19 @@ export const experiences: Experience[] = [
     period: 'Sept 2024 – Sept 2025',
     location: 'London, United Kingdom',
     descriptionPoints: [
-      'Designed and delivered 10+ reusable React components, improving UI consistency and reducing duplicate code.',
-      'Led front-end implementation for 3–4 user stories, translating requirements into responsive, functional interfaces.',
-      'Facilitated 5+ requirement-clarification sessions with stakeholders to align technical decisions with business goals.',
-      'Produced use case, activity, and sequence diagrams for 3+ features, reducing development ambiguity.',
-      'Built high-fidelity prototypes for 5 screens, accelerating feedback cycles and reducing UI rework.',
-      'Followed structured Git workflows using feature branches and pull requests, contributing 20+ commits and reviewing 6–8 PRs.',
-      'Worked closely with designers and product owners to apply UI/UX best practices.',
-      'Supported Agile delivery across 4–6 sprints, contributing to planning, reviews, and retrospectives.',
-      'Identified and fixed UI bugs and layout issues before release, improving usability.',
+      "Designed and built core SaaS features for education platforms, including student/staff management, attendance, assessment, admissions, and multi-school administration used across 15+ operational modules.",
+      
+      "Developed high-performance SSR applications using React Router v7 (Remix-style) with Vite, supporting 300+ file-based routes for admins, teachers, students, and parents.",
+      
+      "Modernized legacy education systems into scalable MERN + SSR architectures with reusable components and layouts.",
+      
+      "Implemented secure authentication and RBAC using JWT, cookie sessions, bcrypt, and role-based permissions for sensitive education data.",
+      
+      "Managed large-scale MongoDB databases with 35+ Mongoose models, optimizing queries for attendance, safeguarding, reporting, and HR workflows.",
+      
+      "Improved payments, payroll, enrolment, and checkout processes with enhanced validation and real-time transaction management.",
+      
+      "Integrated OpenAI APIs and document embeddings to deliver AI-powered features, including intelligent document ingestion and data insights for education workflows."
     ],
     icon: Rss,
   },
