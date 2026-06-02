@@ -309,23 +309,6 @@ export const experiences: Experience[] = [
     period: 'Dec 2025 – Present',
     location: 'London, United Kingdom',
     descriptionPoints: [
-      'Built and maintained SSR applications using React Router v7 and Remix-style patterns with Vite, supporting 300+ file-based routes.',
-      'Modernised legacy PHP platforms into MERN and SSR architectures with reusable layouts and shared components.',
-      'Implemented secure authentication and RBAC using cookie sessions, JWT, bcrypt, and role-based permission checks.',
-      'Developed and enhanced admin and back-office systems for education platforms, supporting 15+ operational modules.',
-      'Managed MongoDB and Mongoose at scale with 35+ data models, ensuring reliable queries and SSR-safe data access.',
-      'Improved payments and checkout flows through stronger validation and transaction status handling.',
-      'Contributed to AI and RAG features using OpenAI, Qdrant, embeddings, and document ingestion, optimising response performance.',
-    ],
-    icon: Building,
-  },
-  {
-    id: 'lifelancer-2024',
-    company: 'Lifelancer UK',
-    role: 'Software Engineer',
-    period: 'Sept 2024 – Sept 2025',
-    location: 'London, United Kingdom',
-    descriptionPoints: [
       "Designed and built core SaaS features for education platforms, including student/staff management, attendance, assessment, admissions, and multi-school administration used across 15+ operational modules.",
       
       "Developed high-performance SSR applications using React Router v7 (Remix-style) with Vite, supporting 300+ file-based routes for admins, teachers, students, and parents.",
@@ -339,6 +322,25 @@ export const experiences: Experience[] = [
       "Improved payments, payroll, enrolment, and checkout processes with enhanced validation and real-time transaction management.",
       
       "Integrated OpenAI APIs and document embeddings to deliver AI-powered features, including intelligent document ingestion and data insights for education workflows."
+    ],
+    icon: Building,
+  },
+  {
+    id: 'lifelancer-2024',
+    company: 'Lifelancer UK',
+    role: 'Software Engineer',
+    period: 'Sept 2024 – Sept 2025',
+    location: 'London, United Kingdom',
+    descriptionPoints: [
+      'Designed and delivered 10+ reusable React components, improving UI consistency and reducing duplicate code.',
+      'Led front-end implementation for 3–4 user stories, translating requirements into responsive, functional interfaces.',
+      'Facilitated 5+ requirement-clarification sessions with stakeholders to align technical decisions with business goals.',
+      'Produced use case, activity, and sequence diagrams for 3+ features, reducing development ambiguity.',
+      'Built high-fidelity prototypes for 5 screens, accelerating feedback cycles and reducing UI rework.',
+      'Followed structured Git workflows using feature branches and pull requests, contributing 20+ commits and reviewing 6–8 PRs.',
+      'Worked closely with designers and product owners to apply UI/UX best practices.',
+      'Supported Agile delivery across 4–6 sprints, contributing to planning, reviews, and retrospectives.',
+      'Identified and fixed UI bugs and layout issues before release, improving usability.',
     ],
     icon: Rss,
   },
