@@ -8,7 +8,6 @@ import React, {
   CSSProperties,
 } from "react";
 import Image from 'next/image';
-import { useTheme } from "next-themes";
 import "./ProfileCard.css";
 
 interface ProfileCardProps {
@@ -64,30 +63,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const { resolvedTheme } = useTheme();
-
-  // 🌗 THEME-AWARE GRADIENTS
-  const themedDefaultBehindGradient =
-  resolvedTheme === "light"
-    ? `radial-gradient(circle at var(--pointer-x) var(--pointer-y),
-        hsl(210, 13%, 70%) 0%,
-        hsl(210, 13%, 60%, 0.5) 40%,
-        transparent 100%)`
-    : `radial-gradient(circle at var(--pointer-x) var(--pointer-y),
-        hsl(180, 100%, 30%) 0%,
-        hsl(180, 100%, 30%, 0.4) 40%,
-        transparent 100%)`;
-
-
-        const themedDefaultInnerGradient =
-        resolvedTheme === "light"
-          ? `linear-gradient(135deg,
-              hsl(210, 13%, 95%) 0%,
-              hsl(210, 13%, 85%) 100%)`
-          : `linear-gradient(135deg,
-              hsl(180, 100%, 15%) 0%,
-              hsl(180, 100%, 25%) 100%)`;
-      
 
   const animationHandlers = useMemo(() => {
     if (!enableTilt) return null;
@@ -230,22 +205,24 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     };
   }, [animationHandlers, enableTilt, handlePointerEnter, handlePointerMove, handlePointerLeave]);
 
-  const cardStyle = useMemo(() => ({
-    "--icon": iconUrl ? `url(${iconUrl})` : "none",
-    "--grain": grainUrl ? `url(${grainUrl})` : "none",
-    "--behind-gradient": showBehindGradient
-      ? behindGradient ?? themedDefaultBehindGradient
-      : "none",
-    "--inner-gradient": innerGradient ?? themedDefaultInnerGradient,
-  } as CSSProperties), [
-    iconUrl,
-    grainUrl,
-    showBehindGradient,
-    behindGradient,
-    themedDefaultBehindGradient,
-    innerGradient,
-    themedDefaultInnerGradient,
-  ]);
+  const cardStyle = useMemo(() => {
+    const style: Record<string, string> = {
+      "--icon": iconUrl ? `url(${iconUrl})` : "none",
+      "--grain": grainUrl ? `url(${grainUrl})` : "none",
+    };
+
+    if (behindGradient) {
+      style["--behind-gradient"] = behindGradient;
+    } else if (!showBehindGradient) {
+      style["--behind-gradient"] = "none";
+    }
+
+    if (innerGradient) {
+      style["--inner-gradient"] = innerGradient;
+    }
+
+    return style as CSSProperties;
+  }, [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]);
 
   return (
     <div ref={wrapRef} className={`pc-card-wrapper ${className || ""}`} style={cardStyle}>

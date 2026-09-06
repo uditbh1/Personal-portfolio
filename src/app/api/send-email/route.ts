@@ -12,6 +12,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.warn('⚠️ EMAIL_USER or EMAIL_PASS environment variables are not configured in .env.local');
+      return NextResponse.json(
+        { 
+          error: 'Email service credentials not configured. Please set EMAIL_USER and EMAIL_PASS in your .env.local file.',
+          isMissingConfig: true
+        },
+        { status: 500 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -22,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO,
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
       replyTo: email,
       subject: `New Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,

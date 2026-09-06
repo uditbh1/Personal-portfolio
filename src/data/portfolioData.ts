@@ -415,6 +415,41 @@ export const education: EducationItem[] = [
   },
 ];
 
+export interface CertificationItem {
+  id: string;
+  name: string;
+  code: string;
+  issuer: string;
+  badge: string;
+  credentialId: string;
+  link: string;
+  period: string;
+  description: string;
+  skills: string[];
+}
+
+export const certifications: CertificationItem[] = [
+  {
+    id: 'ai-901',
+    name: 'Microsoft Certified: Azure AI Fundamentals',
+    code: 'AI-901',
+    issuer: 'Microsoft',
+    badge: 'Verified Credential',
+    credentialId: 'D2CDC4B11CE03AF7',
+    link: 'https://learn.microsoft.com/api/credentials/share/en-us/UditBhatia-0784/D2CDC4B11CE03AF7?sharingId=78262910EB2D7C35',
+    period: 'Issued 2025 • Lifetime Active',
+    description: 'Validates foundational knowledge of Machine Learning (ML) and Artificial Intelligence (AI) workloads and related Microsoft Azure services, including computer vision, natural language processing, generative AI, and responsible AI.',
+    skills: [
+      'Azure AI Services',
+      'Machine Learning Workloads',
+      'Computer Vision',
+      'Natural Language Processing',
+      'Generative AI',
+      'Responsible AI'
+    ]
+  }
+];
+
 export interface SkillCategory {
   id: string;
   name: string;

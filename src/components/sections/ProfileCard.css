@@ -11,8 +11,13 @@
   --background-y: 50%;
   --grain: none;
   --icon: none;
-  --behind-gradient: none;
-  --inner-gradient: none;
+  --behind-gradient: radial-gradient(circle at var(--pointer-x) var(--pointer-y),
+      hsl(210, 13%, 70%) 0%,
+      hsla(210, 13%, 60%, 0.5) 40%,
+      transparent 100%);
+  --inner-gradient: linear-gradient(135deg,
+      hsl(210, 13%, 95%) 0%,
+      hsl(210, 13%, 85%) 100%);
   --sunpillar-1: hsl(2, 100%, 73%);
   --sunpillar-2: hsl(53, 100%, 69%);
   --sunpillar-3: hsl(93, 100%, 69%);
@@ -28,14 +33,25 @@
   --card-radius: 30px;
 }
 
+.dark {
+  --behind-gradient: radial-gradient(circle at var(--pointer-x) var(--pointer-y),
+      hsl(180, 100%, 30%) 0%,
+      hsla(180, 100%, 30%, 0.4) 40%,
+      transparent 100%);
+  --inner-gradient: linear-gradient(135deg,
+      hsl(180, 100%, 15%) 0%,
+      hsl(180, 100%, 25%) 100%);
+}
+
 .pc-card-wrapper {
   perspective: 500px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
   touch-action: none;
   width: 100%;
-  max-width: 320px; /* Max width for small devices */
+  max-width: min(100%, 320px); /* Max width for small devices */
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .pc-card-wrapper::before {
@@ -361,7 +377,7 @@
 
 @media (max-width: 480px) {
   .pc-card-wrapper {
-    max-width: 300px;
+    max-width: min(100%, 300px);
   }
   .pc-card {
     min-height: 380px;
@@ -414,7 +430,7 @@
 
 @media (max-width: 320px) {
   .pc-card-wrapper {
-    max-width: 250px;
+    max-width: min(100%, 250px);
   }
   .pc-card {
     min-height: 320px;
